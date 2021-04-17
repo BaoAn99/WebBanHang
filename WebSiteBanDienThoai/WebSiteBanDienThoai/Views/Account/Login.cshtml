@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Đăng Nhập";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Main Breadcrumb -->
+<div class="main-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="/">Trang chủ</a></li>
+                    <li class="active">Đăng nhập</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main Breadcrumb -->
+<!-- Main Content -->
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-style form-login">
+                    <h3 class="form-heading">Đăng nhập</h3>
+                    <p class="form-description">Nếu bạn có một tài khoản, xin vui lòng đăng nhập.</p>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <p>Tên đăng nhập*</p>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" value="" id="txtUsername" name="usename">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <p>Mật Khẩu*</p>
+                        </div>
+                        <div class="col-md-10">
+                            <input type="password" value="" id="txtPassword" name="password">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-10">
+                            <p><a href="../Account/Register">Đăng ký</a></p>
+                            <button class="btn btn-success" id="btnLogin" onclick="login()">Đăng nhập</button>
+                        </div>
+                    </div>
+                    <input name="returnUrl" type="hidden" value="../Cart/checkout">
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-5">
+                <div class="form-style form-login">
+                    @using (Html.BeginForm("Recover", "Account", FormMethod.Post))
+                    {
+                        <h3 class="form-heading">Quên mật khẩu</h3>
+                        <p class="form-description">Bạn đã có một tài khoản nhưng không nhớ mật khẩu.</p>
+                        <p>
+                            Hãy điền Email xuống phía dưới và nhận thông tin qua Email để có thể lấy lại mật khẩu.
+                        </p>
+                        <p>Email</p>
+                            <input type="email" value="" name="email">
+                            <button class="btn btn-primary" type="submit">Gửi thông tin</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<!-- End Main Content --> 
+<script src="~/Scripts/Account/login.js"></script>

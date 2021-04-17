@@ -1,0 +1,108 @@
+﻿<div id="page-title">
+    <h5 class="text-overflow">Sửa sản phẩm</h5>
+    <!--Searchbox-->
+    <div class="searchbox">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Search..">
+            <span class="input-group-btn">
+                <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+    <li><a ui-sref="home">Home</a></li>
+    <li><a ui-sref="product">Sản Phẩm</a></li>
+    <li class="active">Chỉnh sửa</li>
+</ol>
+<!--End breadcrumb-->
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content" ng-controller="productEditController">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="product_add#sp">Sản Phẩm chính </a>
+        </li>
+    </ul>
+    <!--Tabs Content-->
+    <div class="tab-content">
+        <div id="sp" class="tab-pane fade active in">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Tên sản phẩm</label>
+                                        <input type="text" class="form-control" ng-model="pro.Name" required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Loại sản phẩm</label>
+                                        <select class="form-control" ng-model="pro.TypeProductID" required 
+                                                ng-options="opt.TypeProductID as opt.TypeProductName for opt in TypeProducts ">                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--<div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Số lượng(Chiếc)</label>
+                                        <input type="number" class="form-control" ng-model="pro.Amount" />
+                                    </div>
+                                </div>-->
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Đơn giá: <b>{{pro.PriceProduct|number:0}}</b> VNĐ</label>
+                                        <input type="number" class="form-control" ng-model="pro.PriceProduct" value="0">
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Nhà cung cấp</label>
+                                        <select class="form-control" ng-model="pro.SupplierID" required
+                                                ng-options="opt.SupplierID as opt.Name for opt in Suppliers">                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label" style="padding-right:20px">Trạng thái</label>
+                                        <label class="form-checkbox form-normal form-primary form-text" id="pro-status" ng-click="_changeCheckBox()">
+                                            <input type="checkbox" ng-model="pro.Status" />
+                                        </label>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Product Image</label>
+                                        <button class="btn btn-success btn-labeled fa fa-upload fa-lg" ng-click="ChooseImage()">Chọn ảnh</button>
+                                        <input type="text" class="form-control" ng-model="pro.Images" disabled />
+                                        <img class="img img-thumbnail" ng-src="{{pro.Images}}" id="img1" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button class="btn btn-default btn-icon icon-lg fa fa-arrow-left fa-lg" type="button" ui-sref="products"></button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-success btn-labeled fa fa-send fa-lg" style="float: right;" type="submit" ng-click="Put()" data-target="#demo-panel-ref">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

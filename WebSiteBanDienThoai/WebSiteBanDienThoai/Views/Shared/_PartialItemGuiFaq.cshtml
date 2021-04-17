@@ -1,0 +1,163 @@
+﻿
+<style>
+    .widget-area {
+        background-color: #fff;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+        -moz-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+        -ms-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+        -o-box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+        box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+        float: left;
+        margin-top: 30px;
+        padding: 25px 30px;
+        position: relative;
+        width: 100%;
+    }
+
+    .status-upload {
+        background: none repeat scroll 0 0 #f5f5f5;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        border-radius: 4px;
+        float: left;
+        width: 100%;
+    }
+
+        .status-upload form {
+            float: left;
+            width: 100%;
+        }
+
+            .status-upload form textarea {
+                background: none repeat scroll 0 0 #fff;
+                border: medium none;
+                -webkit-border-radius: 4px 4px 0 0;
+                -moz-border-radius: 4px 4px 0 0;
+                -ms-border-radius: 4px 4px 0 0;
+                -o-border-radius: 4px 4px 0 0;
+                border-radius: 4px 4px 0 0;
+                color: #777777;
+                float: left;
+                font-family: Lato;
+                font-size: 14px;
+                height: 142px;
+                letter-spacing: 0.3px;
+                padding: 20px;
+                width: 100%;
+                resize: vertical;
+                outline: none;
+                border: 1px solid #F2F2F2;
+            }
+
+        .status-upload ul {
+            float: left;
+            list-style: none outside none;
+            margin: 0;
+            padding: 0 0 0 15px;
+            width: auto;
+        }
+
+            .status-upload ul > li {
+                float: left;
+            }
+
+                .status-upload ul > li > a {
+                    -webkit-border-radius: 4px;
+                    -moz-border-radius: 4px;
+                    -ms-border-radius: 4px;
+                    -o-border-radius: 4px;
+                    border-radius: 4px;
+                    color: #777777;
+                    float: left;
+                    font-size: 14px;
+                    height: 30px;
+                    line-height: 30px;
+                    margin: 10px 0 10px 10px;
+                    text-align: center;
+                    -webkit-transition: all 0.4s ease 0s;
+                    -moz-transition: all 0.4s ease 0s;
+                    -ms-transition: all 0.4s ease 0s;
+                    -o-transition: all 0.4s ease 0s;
+                    transition: all 0.4s ease 0s;
+                    width: 30px;
+                    cursor: pointer;
+                }
+
+                    .status-upload ul > li > a:hover {
+                        background: none repeat scroll 0 0 #606060;
+                        color: #fff;
+                    }
+
+        .status-upload form button {
+            border: medium none;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            -ms-border-radius: 4px;
+            -o-border-radius: 4px;
+            border-radius: 4px;
+            color: #fff;
+            float: right;
+            font-family: Lato;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+            margin-right: 9px;
+            margin-top: 9px;
+            padding: 6px 15px;
+        }
+
+    .dropdown > a > span.green:before {
+        border-left-color: #2dcb73;
+    }
+
+    .status-upload form button > i {
+        margin-right: 7px;
+    }
+</style>
+<div role="tabpanel" class="tab-pane" id="pd-dac-diem">
+    Bước 1: Truy cập website và lựa chọn sản phẩm cần mua để mua hàng<br><br>
+    Bước 2: Click và sản phẩm muốn mua, màn hình hiển thị ra pop up với các lựa chọn sau<br>
+    Nếu bạn muốn tiếp tục mua hàng: Bấm vào phần tiếp tục mua hàng để lựa chọn thêm sản phẩm vào giỏ hàng<br>
+    Nếu bạn muốn xem giỏ hàng để cập nhật sản phẩm: Bấm vào xem giỏ hàng<br>
+    Nếu bạn muốn đặt hàng và thanh toán cho sản phẩm này vui lòng bấm vào: Đặt hàng và thanh toán<br><br>
+    Bước 3: Lựa chọn thông tin tài khoản thanh toán<br>
+    Nếu bạn đã có tài khoản vui lòng nhập thông tin tên đăng nhập là email và mật khẩu vào mục đã có tài khoản trên hệ thống<br>
+    Nếu bạn chưa có tài khoản và muốn đăng ký tài khoản vui lòng điền các thông tin cá nhân để tiếp tục đăng ký tài khoản. Khi có tài khoản bạn sẽ dễ dàng theo dõi được đơn hàng của mình<br>
+    Nếu bạn muốn mua hàng mà không cần tài khoản vui lòng nhấp chuột vào mục đặt hàng không cần tài khoản<br><br>
+    Bước 4: Điền các thông tin của bạn để nhận đơn hàng, lựa chọn hình thức thanh toán và vận chuyển cho đơn hàng của mình<br><br>
+    Bước 5: Xem lại thông tin đặt hàng, điền chú thích và gửi đơn hàng<br>
+    Sau khi nhận được đơn hàng bạn gửi chúng tôi sẽ liên hệ bằng cách gọi điện lại để xác nhận lại đơn hàng và địa chỉ của bạn.<br>
+    Trân trọng cảm ơn.
+</div>
+<div role="tabpanel" class="tab-pane" id="pd-danh-gia">
+    Với mong muốn mang lại sự hài lòng cho quý khách khi mua hàng, chúng tôi có những quy định trong vận chuyển, nhằm đảm bảo rằng những sản phẩm quý khách mua là sản phẩm mà vừa ý nhất.<br><br>
+    1. Chúng tôi sẽ được thực hiện và chuyển phát dựa trên mẫu khách hàng đã chọn. Trường hợp không có đúng sản phẩm Quý khách yêu cầu chúng tôi sẽ gọi điện xác nhận gửi sản phẩm tương tự thay thế.<br><br>
+    2. Thời gian chuyển phát tiêu chuẩn cho một đơn hàng là 12 giờ kể từ lúc đặt hàng. Chuyển phát sản phẩm đến các khu vực nội thành thành phố trên toàn quốc từ 4 giờ kể từ khi nhận hàng, chuyển phát ngay trong ngày đến các vùng lân cận (bán kính từ 10km – 50km).<br><br>
+    3. Các đơn hàng gửi đi quốc tế: không đảm bảo thời gian được chính xác như yêu cầu, không đảm bảo thời gian nếu thời điểm chuyển phát trùng với các ngày lễ, tết và chủ nhật tại khu vực nơi đến.<br><br>
+    4. Trường hợp không liên lạc được với người nhận, người nhận đi vắng:<br>
+    - Nếu chưa rõ địa chỉ chúng tôi sẽ lưu lại trong vòng 6 tiếng và liên lạc lại với người nhận, trong trường hợp ko liên lạc được đơn hàng sẽ bị hủy và không được hoàn lại thanh toán.<br>
+    - Nếu địa chỉ là công ty, văn phòng, nhà ở… Chúng tôi sẽ gửi đồng nghiệp, người thân nhận hộ và ký xác nhận<br>
+    - Để tại một nơi an toàn người nhận dễ nhận thấy tại nhà, văn phòng, công ty… Trường hợp này không có ký nhận.<br>
+    5. Trường hợp người nhận không nhận đơn hàng:<br>
+    - Chúng tôi sẽ hủy bỏ đơn hàng. Trường hợp này sẽ không được hoàn trả thanh toán.<br><br>
+    6. Trường hợp không đúng địa chỉ, thay đổi địa chỉ:<br>
+    - Không đúng địa chỉ: trường hợp sai địa chỉ chúng tôi sẽ lưu lại 6 tiếng và liên lạc với người gửi và người nhận để thỏa thuận về địa điểm, thời gian, nếu địa chỉ mới không quá 3km sẽ phát miễn phí. Trường hợp địa chỉ mới xa hơn 3km sẽ tính thêm phí theo quy định chuyển phát.<br><br>
+    7. Trường hợp không tồn tại người nhận tại địa chỉ yêu cầu: đơn hàng sẽ được hủy và không được hoàn lại thanh toán.<br><br>
+    8. Chúng tôi không vận chuyển sản phẩm đến các địa chỉ trên tàu hỏa, máy bay, tàu thủy, khu vực nguy hiểm, các khu vực cấm…
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+
+
+        $("[data-toggle=tooltip]").tooltip();
+    });
+</script>

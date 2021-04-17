@@ -1,0 +1,1665 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QLBHDienThoaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BillOfSale">
+          <Key>
+            <PropertyRef Name="BillID" />
+          </Key>
+          <Property Name="BillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CartID" Type="int" />
+          <Property Name="BuyDate" Type="date" />
+          <Property Name="Status" Type="int" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="EmployeeDeliveryID" Type="int" />
+        </EntityType>
+        <EntityType Name="BillSaleDetail">
+          <Key>
+            <PropertyRef Name="BillDetailID" />
+          </Key>
+          <Property Name="BillDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BillID" Type="int" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="PriceProduct" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="PromotionID" Type="int" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="VAT" Type="int" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="PaymentID" Type="int" />
+        </EntityType>
+        <EntityType Name="CartDetail">
+          <Key>
+            <PropertyRef Name="CartDetailID" />
+          </Key>
+          <Property Name="CartDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CartID" Type="int" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="PromotionID" Type="int" />
+          <Property Name="PriceProduct" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PaymentID" Type="int" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Content" Type="nvarchar" MaxLength="200" />
+          <Property Name="Date" Type="date" />
+          <Property Name="CustomerID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fullname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" />
+          <Property Name="Birthday" Type="date" />
+          <Property Name="Gender" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Birthday" Type="date" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" />
+          <Property Name="RoleID" Type="int" />
+          <Property Name="Type" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderInvoice">
+          <Key>
+            <PropertyRef Name="OrderInvoiceID" />
+          </Key>
+          <Property Name="OrderInvoiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime2" Precision="7" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="EmployeeID" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderInvoiceDetail">
+          <Key>
+            <PropertyRef Name="InvoiceDetailID" />
+          </Key>
+          <Property Name="InvoiceDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderInvoiceID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="PriceProduct" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Pay">
+          <Key>
+            <PropertyRef Name="PayID" />
+          </Key>
+          <Property Name="Date" Type="date" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="TotalPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ReceiptID" Type="int" />
+          <Property Name="PayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PayDetail">
+          <Key>
+            <PropertyRef Name="PayDetailID" />
+          </Key>
+          <Property Name="PayDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PayID" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Describe" Type="nvarchar" MaxLength="200" />
+          <Property Name="ProductID" Type="int" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="PriceProduct" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Images" Type="varchar" MaxLength="100" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="TypeProductID" Type="int" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="PromotionID" />
+          </Key>
+          <Property Name="PromotionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PromotionName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypePromotion" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeProductID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="StartTime" Type="date" />
+          <Property Name="EndTime" Type="date" />
+          <Property Name="SaleOff" Type="float" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="ReceiptID" />
+          </Key>
+          <Property Name="Date" Type="date" />
+          <Property Name="EmployeeID" Type="int" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillID" Type="int" />
+          <Property Name="ReceiptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <EntityType Name="ReceiptDetail">
+          <Key>
+            <PropertyRef Name="ReceiptDetailID" />
+          </Key>
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Amount" Type="int" />
+          <Property Name="Describe" Type="nvarchar" MaxLength="200" />
+          <Property Name="ReceiptDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceiptID" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="SupplierID" />
+          </Key>
+          <Property Name="SupplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Phone" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TypeProduct">
+          <Key>
+            <PropertyRef Name="TypeProductID" />
+          </Key>
+          <Property Name="TypeProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeProductName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="CustormerId" Type="int" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="250" />
+          <Property Name="IsLocked" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__BillOfSal__CartI__5CD6CB2B">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="BillOfSale" Type="Self.BillOfSale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="BillOfSale">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartDetai__CartI__619B8048">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="CartDetail">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartDetai__Promo__628FA481">
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
+          <End Role="CartDetail" Type="Self.CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="PromotionID" />
+            </Principal>
+            <Dependent Role="CartDetail">
+              <PropertyRef Name="PromotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pay__ReceiptID__02FC7413">
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="0..1" />
+          <End Role="Pay" Type="Self.Pay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="ReceiptID" />
+            </Principal>
+            <Dependent Role="Pay">
+              <PropertyRef Name="ReceiptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PayDetail__Produ__04E4BC85">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="PayDetail" Type="Self.PayDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="PayDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReceiptDe__Recei__0C85DE4D">
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="0..1" />
+          <End Role="ReceiptDetail" Type="Self.ReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="ReceiptID" />
+            </Principal>
+            <Dependent Role="ReceiptDetail">
+              <PropertyRef Name="ReceiptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__CustormerI__6FE99F9F">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CustormerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__EmployeeId__70DDC3D8">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillOfSale_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="BillOfSale" Type="Self.BillOfSale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="BillOfSale">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillSaleDetail_BillOfSale">
+          <End Role="BillOfSale" Type="Self.BillOfSale" Multiplicity="0..1" />
+          <End Role="BillSaleDetail" Type="Self.BillSaleDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BillOfSale">
+              <PropertyRef Name="BillID" />
+            </Principal>
+            <Dependent Role="BillSaleDetail">
+              <PropertyRef Name="BillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillSaleDetail_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="BillSaleDetail" Type="Self.BillSaleDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="BillSaleDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillSaleDetail_Promotion">
+          <End Role="Promotion" Type="Self.Promotion" Multiplicity="0..1" />
+          <End Role="BillSaleDetail" Type="Self.BillSaleDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="PromotionID" />
+            </Principal>
+            <Dependent Role="BillSaleDetail">
+              <PropertyRef Name="PromotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Payment">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="PaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInvoice_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="OrderInvoice" Type="Self.OrderInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="OrderInvoice">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInvoice_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="OrderInvoice" Type="Self.OrderInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="OrderInvoice">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInvoiceDetail_OrderInvoice">
+          <End Role="OrderInvoice" Type="Self.OrderInvoice" Multiplicity="0..1" />
+          <End Role="OrderInvoiceDetail" Type="Self.OrderInvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderInvoice">
+              <PropertyRef Name="OrderInvoiceID" />
+            </Principal>
+            <Dependent Role="OrderInvoiceDetail">
+              <PropertyRef Name="OrderInvoiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInvoiceDetail_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="OrderInvoiceDetail" Type="Self.OrderInvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderInvoiceDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pay_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Pay" Type="Self.Pay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Pay">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayDetail">
+          <End Role="Pay" Type="Self.Pay" Multiplicity="1" />
+          <End Role="PayDetail" Type="Self.PayDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pay">
+              <PropertyRef Name="PayID" />
+            </Principal>
+            <Dependent Role="PayDetail">
+              <PropertyRef Name="PayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_TypeProduct">
+          <End Role="TypeProduct" Type="Self.TypeProduct" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeProduct">
+              <PropertyRef Name="TypeProductID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="TypeProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_BillOfSale">
+          <End Role="BillOfSale" Type="Self.BillOfSale" Multiplicity="0..1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BillOfSale">
+              <PropertyRef Name="BillID" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="BillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Receipt" Type="Self.Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QLBHDienThoaiModelStoreContainer">
+          <EntitySet Name="BillOfSale" EntityType="Self.BillOfSale" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BillSaleDetail" EntityType="Self.BillSaleDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartDetail" EntityType="Self.CartDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderInvoice" EntityType="Self.OrderInvoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderInvoiceDetail" EntityType="Self.OrderInvoiceDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pay" EntityType="Self.Pay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayDetail" EntityType="Self.PayDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Receipt" EntityType="Self.Receipt" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReceiptDetail" EntityType="Self.ReceiptDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeProduct" EntityType="Self.TypeProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BillOfSal__CartI__5CD6CB2B" Association="Self.FK__BillOfSal__CartI__5CD6CB2B">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="BillOfSale" EntitySet="BillOfSale" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartDetai__CartI__619B8048" Association="Self.FK__CartDetai__CartI__619B8048">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="CartDetail" EntitySet="CartDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartDetai__Promo__628FA481" Association="Self.FK__CartDetai__Promo__628FA481">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="CartDetail" EntitySet="CartDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pay__ReceiptID__02FC7413" Association="Self.FK__Pay__ReceiptID__02FC7413">
+            <End Role="Receipt" EntitySet="Receipt" />
+            <End Role="Pay" EntitySet="Pay" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PayDetail__Produ__04E4BC85" Association="Self.FK__PayDetail__Produ__04E4BC85">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="PayDetail" EntitySet="PayDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReceiptDe__Recei__0C85DE4D" Association="Self.FK__ReceiptDe__Recei__0C85DE4D">
+            <End Role="Receipt" EntitySet="Receipt" />
+            <End Role="ReceiptDetail" EntitySet="ReceiptDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__CustormerI__6FE99F9F" Association="Self.FK__User__CustormerI__6FE99F9F">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__EmployeeId__70DDC3D8" Association="Self.FK__User__EmployeeId__70DDC3D8">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillOfSale_Employee" Association="Self.FK_BillOfSale_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="BillOfSale" EntitySet="BillOfSale" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillSaleDetail_BillOfSale" Association="Self.FK_BillSaleDetail_BillOfSale">
+            <End Role="BillOfSale" EntitySet="BillOfSale" />
+            <End Role="BillSaleDetail" EntitySet="BillSaleDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillSaleDetail_Product" Association="Self.FK_BillSaleDetail_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="BillSaleDetail" EntitySet="BillSaleDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillSaleDetail_Promotion" Association="Self.FK_BillSaleDetail_Promotion">
+            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="BillSaleDetail" EntitySet="BillSaleDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Customer" Association="Self.FK_Cart_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Payment" Association="Self.FK_Cart_Payment">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Customer" Association="Self.FK_Comment_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Product" Association="Self.FK_Comment_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Role" Association="Self.FK_Employee_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInvoice_Employee" Association="Self.FK_OrderInvoice_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="OrderInvoice" EntitySet="OrderInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInvoice_Supplier" Association="Self.FK_OrderInvoice_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="OrderInvoice" EntitySet="OrderInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInvoiceDetail_OrderInvoice" Association="Self.FK_OrderInvoiceDetail_OrderInvoice">
+            <End Role="OrderInvoice" EntitySet="OrderInvoice" />
+            <End Role="OrderInvoiceDetail" EntitySet="OrderInvoiceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInvoiceDetail_Product" Association="Self.FK_OrderInvoiceDetail_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderInvoiceDetail" EntitySet="OrderInvoiceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pay_Employee" Association="Self.FK_Pay_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Pay" EntitySet="Pay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayDetail" Association="Self.FK_PayDetail">
+            <End Role="Pay" EntitySet="Pay" />
+            <End Role="PayDetail" EntitySet="PayDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Supplier" Association="Self.FK_Product_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_TypeProduct" Association="Self.FK_Product_TypeProduct">
+            <End Role="TypeProduct" EntitySet="TypeProduct" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_BillOfSale" Association="Self.FK_Receipt_BillOfSale">
+            <End Role="BillOfSale" EntitySet="BillOfSale" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_Employee" Association="Self.FK_Receipt_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Receipt" EntitySet="Receipt" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLBHDienThoaiModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="QLBHDienThoaiEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BillOfSales" EntityType="QLBHDienThoaiModel.BillOfSale" />
+          <EntitySet Name="BillSaleDetails" EntityType="QLBHDienThoaiModel.BillSaleDetail" />
+          <EntitySet Name="Carts" EntityType="QLBHDienThoaiModel.Cart" />
+          <EntitySet Name="CartDetails" EntityType="QLBHDienThoaiModel.CartDetail" />
+          <EntitySet Name="Comments" EntityType="QLBHDienThoaiModel.Comment" />
+          <EntitySet Name="Customers" EntityType="QLBHDienThoaiModel.Customer" />
+          <EntitySet Name="Employees" EntityType="QLBHDienThoaiModel.Employee" />
+          <EntitySet Name="OrderInvoices" EntityType="QLBHDienThoaiModel.OrderInvoice" />
+          <EntitySet Name="OrderInvoiceDetails" EntityType="QLBHDienThoaiModel.OrderInvoiceDetail" />
+          <EntitySet Name="Pays" EntityType="QLBHDienThoaiModel.Pay" />
+          <EntitySet Name="PayDetails" EntityType="QLBHDienThoaiModel.PayDetail" />
+          <EntitySet Name="Payments" EntityType="QLBHDienThoaiModel.Payment" />
+          <EntitySet Name="Products" EntityType="QLBHDienThoaiModel.Product" />
+          <EntitySet Name="Promotions" EntityType="QLBHDienThoaiModel.Promotion" />
+          <EntitySet Name="Receipts" EntityType="QLBHDienThoaiModel.Receipt" />
+          <EntitySet Name="ReceiptDetails" EntityType="QLBHDienThoaiModel.ReceiptDetail" />
+          <EntitySet Name="Roles" EntityType="QLBHDienThoaiModel.Role" />
+          <EntitySet Name="Suppliers" EntityType="QLBHDienThoaiModel.Supplier" />
+          <EntitySet Name="TypeProducts" EntityType="QLBHDienThoaiModel.TypeProduct" />
+          <EntitySet Name="Users" EntityType="QLBHDienThoaiModel.User" />
+          <AssociationSet Name="FK__BillOfSal__CartI__5CD6CB2B" Association="QLBHDienThoaiModel.FK__BillOfSal__CartI__5CD6CB2B">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="BillOfSale" EntitySet="BillOfSales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillOfSale_Employee" Association="QLBHDienThoaiModel.FK_BillOfSale_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="BillOfSale" EntitySet="BillOfSales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillSaleDetail_BillOfSale" Association="QLBHDienThoaiModel.FK_BillSaleDetail_BillOfSale">
+            <End Role="BillOfSale" EntitySet="BillOfSales" />
+            <End Role="BillSaleDetail" EntitySet="BillSaleDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_BillOfSale" Association="QLBHDienThoaiModel.FK_Receipt_BillOfSale">
+            <End Role="BillOfSale" EntitySet="BillOfSales" />
+            <End Role="Receipt" EntitySet="Receipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillSaleDetail_Product" Association="QLBHDienThoaiModel.FK_BillSaleDetail_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="BillSaleDetail" EntitySet="BillSaleDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BillSaleDetail_Promotion" Association="QLBHDienThoaiModel.FK_BillSaleDetail_Promotion">
+            <End Role="Promotion" EntitySet="Promotions" />
+            <End Role="BillSaleDetail" EntitySet="BillSaleDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartDetai__CartI__619B8048" Association="QLBHDienThoaiModel.FK__CartDetai__CartI__619B8048">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="CartDetail" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Customer" Association="QLBHDienThoaiModel.FK_Cart_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cart_Payment" Association="QLBHDienThoaiModel.FK_Cart_Payment">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartDetai__Promo__628FA481" Association="QLBHDienThoaiModel.FK__CartDetai__Promo__628FA481">
+            <End Role="Promotion" EntitySet="Promotions" />
+            <End Role="CartDetail" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Customer" Association="QLBHDienThoaiModel.FK_Comment_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comment_Product" Association="QLBHDienThoaiModel.FK_Comment_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__CustormerI__6FE99F9F" Association="QLBHDienThoaiModel.FK__User__CustormerI__6FE99F9F">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__EmployeeId__70DDC3D8" Association="QLBHDienThoaiModel.FK__User__EmployeeId__70DDC3D8">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Role" Association="QLBHDienThoaiModel.FK_Employee_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInvoice_Employee" Association="QLBHDienThoaiModel.FK_OrderInvoice_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="OrderInvoice" EntitySet="OrderInvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pay_Employee" Association="QLBHDienThoaiModel.FK_Pay_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Pay" EntitySet="Pays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Receipt_Employee" Association="QLBHDienThoaiModel.FK_Receipt_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Receipt" EntitySet="Receipts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInvoice_Supplier" Association="QLBHDienThoaiModel.FK_OrderInvoice_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="OrderInvoice" EntitySet="OrderInvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInvoiceDetail_OrderInvoice" Association="QLBHDienThoaiModel.FK_OrderInvoiceDetail_OrderInvoice">
+            <End Role="OrderInvoice" EntitySet="OrderInvoices" />
+            <End Role="OrderInvoiceDetail" EntitySet="OrderInvoiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderInvoiceDetail_Product" Association="QLBHDienThoaiModel.FK_OrderInvoiceDetail_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderInvoiceDetail" EntitySet="OrderInvoiceDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Pay__ReceiptID__02FC7413" Association="QLBHDienThoaiModel.FK__Pay__ReceiptID__02FC7413">
+            <End Role="Receipt" EntitySet="Receipts" />
+            <End Role="Pay" EntitySet="Pays" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayDetail" Association="QLBHDienThoaiModel.FK_PayDetail">
+            <End Role="Pay" EntitySet="Pays" />
+            <End Role="PayDetail" EntitySet="PayDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PayDetail__Produ__04E4BC85" Association="QLBHDienThoaiModel.FK__PayDetail__Produ__04E4BC85">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="PayDetail" EntitySet="PayDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_Supplier" Association="QLBHDienThoaiModel.FK_Product_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_TypeProduct" Association="QLBHDienThoaiModel.FK_Product_TypeProduct">
+            <End Role="TypeProduct" EntitySet="TypeProducts" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReceiptDe__Recei__0C85DE4D" Association="QLBHDienThoaiModel.FK__ReceiptDe__Recei__0C85DE4D">
+            <End Role="Receipt" EntitySet="Receipts" />
+            <End Role="ReceiptDetail" EntitySet="ReceiptDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BillOfSale">
+          <Key>
+            <PropertyRef Name="BillID" />
+          </Key>
+          <Property Name="BillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CartID" Type="Int32" />
+          <Property Name="BuyDate" Type="DateTime" Precision="0" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="EmployeeDeliveryID" Type="Int32" />
+          <NavigationProperty Name="Cart" Relationship="QLBHDienThoaiModel.FK__BillOfSal__CartI__5CD6CB2B" FromRole="BillOfSale" ToRole="Cart" />
+          <NavigationProperty Name="Employee" Relationship="QLBHDienThoaiModel.FK_BillOfSale_Employee" FromRole="BillOfSale" ToRole="Employee" />
+          <NavigationProperty Name="BillSaleDetails" Relationship="QLBHDienThoaiModel.FK_BillSaleDetail_BillOfSale" FromRole="BillOfSale" ToRole="BillSaleDetail" />
+          <NavigationProperty Name="Receipts" Relationship="QLBHDienThoaiModel.FK_Receipt_BillOfSale" FromRole="BillOfSale" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="BillSaleDetail">
+          <Key>
+            <PropertyRef Name="BillDetailID" />
+          </Key>
+          <Property Name="BillDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BillID" Type="Int32" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="PriceProduct" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="PromotionID" Type="Int32" />
+          <NavigationProperty Name="BillOfSale" Relationship="QLBHDienThoaiModel.FK_BillSaleDetail_BillOfSale" FromRole="BillSaleDetail" ToRole="BillOfSale" />
+          <NavigationProperty Name="Product" Relationship="QLBHDienThoaiModel.FK_BillSaleDetail_Product" FromRole="BillSaleDetail" ToRole="Product" />
+          <NavigationProperty Name="Promotion" Relationship="QLBHDienThoaiModel.FK_BillSaleDetail_Promotion" FromRole="BillSaleDetail" ToRole="Promotion" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="VAT" Type="Int32" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="PaymentID" Type="Int32" />
+          <NavigationProperty Name="BillOfSales" Relationship="QLBHDienThoaiModel.FK__BillOfSal__CartI__5CD6CB2B" FromRole="Cart" ToRole="BillOfSale" />
+          <NavigationProperty Name="CartDetails" Relationship="QLBHDienThoaiModel.FK__CartDetai__CartI__619B8048" FromRole="Cart" ToRole="CartDetail" />
+          <NavigationProperty Name="Customer" Relationship="QLBHDienThoaiModel.FK_Cart_Customer" FromRole="Cart" ToRole="Customer" />
+          <NavigationProperty Name="Payment" Relationship="QLBHDienThoaiModel.FK_Cart_Payment" FromRole="Cart" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="CartDetail">
+          <Key>
+            <PropertyRef Name="CartDetailID" />
+          </Key>
+          <Property Name="CartDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CartID" Type="Int32" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="PromotionID" Type="Int32" />
+          <Property Name="PriceProduct" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PaymentID" Type="Int32" />
+          <NavigationProperty Name="Cart" Relationship="QLBHDienThoaiModel.FK__CartDetai__CartI__619B8048" FromRole="CartDetail" ToRole="Cart" />
+          <NavigationProperty Name="Promotion" Relationship="QLBHDienThoaiModel.FK__CartDetai__Promo__628FA481" FromRole="CartDetail" ToRole="Promotion" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="CommentID" />
+          </Key>
+          <Property Name="CommentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Content" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="CustomerID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <NavigationProperty Name="Customer" Relationship="QLBHDienThoaiModel.FK_Comment_Customer" FromRole="Comment" ToRole="Customer" />
+          <NavigationProperty Name="Product" Relationship="QLBHDienThoaiModel.FK_Comment_Product" FromRole="Comment" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Carts" Relationship="QLBHDienThoaiModel.FK_Cart_Customer" FromRole="Customer" ToRole="Cart" />
+          <NavigationProperty Name="Comments" Relationship="QLBHDienThoaiModel.FK_Comment_Customer" FromRole="Customer" ToRole="Comment" />
+          <NavigationProperty Name="Users" Relationship="QLBHDienThoaiModel.FK__User__CustormerI__6FE99F9F" FromRole="Customer" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="RoleID" Type="Int32" />
+          <Property Name="Type" Type="Int32" />
+          <NavigationProperty Name="BillOfSales" Relationship="QLBHDienThoaiModel.FK_BillOfSale_Employee" FromRole="Employee" ToRole="BillOfSale" />
+          <NavigationProperty Name="Users" Relationship="QLBHDienThoaiModel.FK__User__EmployeeId__70DDC3D8" FromRole="Employee" ToRole="User" />
+          <NavigationProperty Name="Role" Relationship="QLBHDienThoaiModel.FK_Employee_Role" FromRole="Employee" ToRole="Role" />
+          <NavigationProperty Name="OrderInvoices" Relationship="QLBHDienThoaiModel.FK_OrderInvoice_Employee" FromRole="Employee" ToRole="OrderInvoice" />
+          <NavigationProperty Name="Pays" Relationship="QLBHDienThoaiModel.FK_Pay_Employee" FromRole="Employee" ToRole="Pay" />
+          <NavigationProperty Name="Receipts" Relationship="QLBHDienThoaiModel.FK_Receipt_Employee" FromRole="Employee" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="OrderInvoice">
+          <Key>
+            <PropertyRef Name="OrderInvoiceID" />
+          </Key>
+          <Property Name="OrderInvoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderDate" Type="DateTime" Precision="7" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <NavigationProperty Name="Employee" Relationship="QLBHDienThoaiModel.FK_OrderInvoice_Employee" FromRole="OrderInvoice" ToRole="Employee" />
+          <NavigationProperty Name="Supplier" Relationship="QLBHDienThoaiModel.FK_OrderInvoice_Supplier" FromRole="OrderInvoice" ToRole="Supplier" />
+          <NavigationProperty Name="OrderInvoiceDetails" Relationship="QLBHDienThoaiModel.FK_OrderInvoiceDetail_OrderInvoice" FromRole="OrderInvoice" ToRole="OrderInvoiceDetail" />
+        </EntityType>
+        <EntityType Name="OrderInvoiceDetail">
+          <Key>
+            <PropertyRef Name="InvoiceDetailID" />
+          </Key>
+          <Property Name="InvoiceDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderInvoiceID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="PriceProduct" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="OrderInvoice" Relationship="QLBHDienThoaiModel.FK_OrderInvoiceDetail_OrderInvoice" FromRole="OrderInvoiceDetail" ToRole="OrderInvoice" />
+          <NavigationProperty Name="Product" Relationship="QLBHDienThoaiModel.FK_OrderInvoiceDetail_Product" FromRole="OrderInvoiceDetail" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Pay">
+          <Key>
+            <PropertyRef Name="PayID" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="TotalPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ReceiptID" Type="Int32" />
+          <Property Name="PayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employee" Relationship="QLBHDienThoaiModel.FK_Pay_Employee" FromRole="Pay" ToRole="Employee" />
+          <NavigationProperty Name="Receipt" Relationship="QLBHDienThoaiModel.FK__Pay__ReceiptID__02FC7413" FromRole="Pay" ToRole="Receipt" />
+          <NavigationProperty Name="PayDetails" Relationship="QLBHDienThoaiModel.FK_PayDetail" FromRole="Pay" ToRole="PayDetail" />
+        </EntityType>
+        <EntityType Name="PayDetail">
+          <Key>
+            <PropertyRef Name="PayDetailID" />
+          </Key>
+          <Property Name="PayDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PayID" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Describe" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProductID" Type="Int32" />
+          <NavigationProperty Name="Pay" Relationship="QLBHDienThoaiModel.FK_PayDetail" FromRole="PayDetail" ToRole="Pay" />
+          <NavigationProperty Name="Product" Relationship="QLBHDienThoaiModel.FK__PayDetail__Produ__04E4BC85" FromRole="PayDetail" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Carts" Relationship="QLBHDienThoaiModel.FK_Cart_Payment" FromRole="Payment" ToRole="Cart" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PriceProduct" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Images" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SupplierID" Type="Int32" />
+          <Property Name="TypeProductID" Type="Int32" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="BillSaleDetails" Relationship="QLBHDienThoaiModel.FK_BillSaleDetail_Product" FromRole="Product" ToRole="BillSaleDetail" />
+          <NavigationProperty Name="Comments" Relationship="QLBHDienThoaiModel.FK_Comment_Product" FromRole="Product" ToRole="Comment" />
+          <NavigationProperty Name="OrderInvoiceDetails" Relationship="QLBHDienThoaiModel.FK_OrderInvoiceDetail_Product" FromRole="Product" ToRole="OrderInvoiceDetail" />
+          <NavigationProperty Name="PayDetails" Relationship="QLBHDienThoaiModel.FK__PayDetail__Produ__04E4BC85" FromRole="Product" ToRole="PayDetail" />
+          <NavigationProperty Name="Supplier" Relationship="QLBHDienThoaiModel.FK_Product_Supplier" FromRole="Product" ToRole="Supplier" />
+          <NavigationProperty Name="TypeProduct" Relationship="QLBHDienThoaiModel.FK_Product_TypeProduct" FromRole="Product" ToRole="TypeProduct" />
+        </EntityType>
+        <EntityType Name="Promotion">
+          <Key>
+            <PropertyRef Name="PromotionID" />
+          </Key>
+          <Property Name="PromotionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PromotionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypePromotion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeProductID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="StartTime" Type="DateTime" Precision="0" />
+          <Property Name="EndTime" Type="DateTime" Precision="0" />
+          <Property Name="SaleOff" Type="Double" />
+          <NavigationProperty Name="BillSaleDetails" Relationship="QLBHDienThoaiModel.FK_BillSaleDetail_Promotion" FromRole="Promotion" ToRole="BillSaleDetail" />
+          <NavigationProperty Name="CartDetails" Relationship="QLBHDienThoaiModel.FK__CartDetai__Promo__628FA481" FromRole="Promotion" ToRole="CartDetail" />
+        </EntityType>
+        <EntityType Name="Receipt">
+          <Key>
+            <PropertyRef Name="ReceiptID" />
+          </Key>
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="EmployeeID" Type="Int32" />
+          <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillID" Type="Int32" />
+          <Property Name="ReceiptID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="BillOfSale" Relationship="QLBHDienThoaiModel.FK_Receipt_BillOfSale" FromRole="Receipt" ToRole="BillOfSale" />
+          <NavigationProperty Name="Employee" Relationship="QLBHDienThoaiModel.FK_Receipt_Employee" FromRole="Receipt" ToRole="Employee" />
+          <NavigationProperty Name="Pays" Relationship="QLBHDienThoaiModel.FK__Pay__ReceiptID__02FC7413" FromRole="Receipt" ToRole="Pay" />
+          <NavigationProperty Name="ReceiptDetails" Relationship="QLBHDienThoaiModel.FK__ReceiptDe__Recei__0C85DE4D" FromRole="Receipt" ToRole="ReceiptDetail" />
+        </EntityType>
+        <EntityType Name="ReceiptDetail">
+          <Key>
+            <PropertyRef Name="ReceiptDetailID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Amount" Type="Int32" />
+          <Property Name="Describe" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiptDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceiptID" Type="Int32" />
+          <NavigationProperty Name="Receipt" Relationship="QLBHDienThoaiModel.FK__ReceiptDe__Recei__0C85DE4D" FromRole="ReceiptDetail" ToRole="Receipt" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Employees" Relationship="QLBHDienThoaiModel.FK_Employee_Role" FromRole="Role" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="SupplierID" />
+          </Key>
+          <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="OrderInvoices" Relationship="QLBHDienThoaiModel.FK_OrderInvoice_Supplier" FromRole="Supplier" ToRole="OrderInvoice" />
+          <NavigationProperty Name="Products" Relationship="QLBHDienThoaiModel.FK_Product_Supplier" FromRole="Supplier" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="TypeProduct">
+          <Key>
+            <PropertyRef Name="TypeProductID" />
+          </Key>
+          <Property Name="TypeProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="QLBHDienThoaiModel.FK_Product_TypeProduct" FromRole="TypeProduct" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="CustormerId" Type="Int32" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsLocked" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="QLBHDienThoaiModel.FK__User__CustormerI__6FE99F9F" FromRole="User" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="QLBHDienThoaiModel.FK__User__EmployeeId__70DDC3D8" FromRole="User" ToRole="Employee" />
+        </EntityType>
+        <Association Name="FK__BillOfSal__CartI__5CD6CB2B">
+          <End Type="QLBHDienThoaiModel.Cart" Role="Cart" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.BillOfSale" Role="BillOfSale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="BillOfSale">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillOfSale_Employee">
+          <End Type="QLBHDienThoaiModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.BillOfSale" Role="BillOfSale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="BillOfSale">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillSaleDetail_BillOfSale">
+          <End Type="QLBHDienThoaiModel.BillOfSale" Role="BillOfSale" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.BillSaleDetail" Role="BillSaleDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BillOfSale">
+              <PropertyRef Name="BillID" />
+            </Principal>
+            <Dependent Role="BillSaleDetail">
+              <PropertyRef Name="BillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_BillOfSale">
+          <End Type="QLBHDienThoaiModel.BillOfSale" Role="BillOfSale" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.Receipt" Role="Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BillOfSale">
+              <PropertyRef Name="BillID" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="BillID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillSaleDetail_Product">
+          <End Type="QLBHDienThoaiModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.BillSaleDetail" Role="BillSaleDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="BillSaleDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BillSaleDetail_Promotion">
+          <End Type="QLBHDienThoaiModel.Promotion" Role="Promotion" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.BillSaleDetail" Role="BillSaleDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="PromotionID" />
+            </Principal>
+            <Dependent Role="BillSaleDetail">
+              <PropertyRef Name="PromotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartDetai__CartI__619B8048">
+          <End Type="QLBHDienThoaiModel.Cart" Role="Cart" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.CartDetail" Role="CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="CartDetail">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Customer">
+          <End Type="QLBHDienThoaiModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cart_Payment">
+          <End Type="QLBHDienThoaiModel.Payment" Role="Payment" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.Cart" Role="Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="PaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartDetai__Promo__628FA481">
+          <End Type="QLBHDienThoaiModel.Promotion" Role="Promotion" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.CartDetail" Role="CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Promotion">
+              <PropertyRef Name="PromotionID" />
+            </Principal>
+            <Dependent Role="CartDetail">
+              <PropertyRef Name="PromotionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Customer">
+          <End Type="QLBHDienThoaiModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comment_Product">
+          <End Type="QLBHDienThoaiModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.Comment" Role="Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__CustormerI__6FE99F9F">
+          <End Type="QLBHDienThoaiModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CustormerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__EmployeeId__70DDC3D8">
+          <End Type="QLBHDienThoaiModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Role">
+          <End Type="QLBHDienThoaiModel.Role" Role="Role" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.Employee" Role="Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInvoice_Employee">
+          <End Type="QLBHDienThoaiModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.OrderInvoice" Role="OrderInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="OrderInvoice">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pay_Employee">
+          <End Type="QLBHDienThoaiModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.Pay" Role="Pay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Pay">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Receipt_Employee">
+          <End Type="QLBHDienThoaiModel.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.Receipt" Role="Receipt" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Receipt">
+              <PropertyRef Name="EmployeeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInvoice_Supplier">
+          <End Type="QLBHDienThoaiModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.OrderInvoice" Role="OrderInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="OrderInvoice">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInvoiceDetail_OrderInvoice">
+          <End Type="QLBHDienThoaiModel.OrderInvoice" Role="OrderInvoice" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.OrderInvoiceDetail" Role="OrderInvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderInvoice">
+              <PropertyRef Name="OrderInvoiceID" />
+            </Principal>
+            <Dependent Role="OrderInvoiceDetail">
+              <PropertyRef Name="OrderInvoiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderInvoiceDetail_Product">
+          <End Type="QLBHDienThoaiModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.OrderInvoiceDetail" Role="OrderInvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderInvoiceDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Pay__ReceiptID__02FC7413">
+          <End Type="QLBHDienThoaiModel.Receipt" Role="Receipt" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.Pay" Role="Pay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="ReceiptID" />
+            </Principal>
+            <Dependent Role="Pay">
+              <PropertyRef Name="ReceiptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayDetail">
+          <End Type="QLBHDienThoaiModel.Pay" Role="Pay" Multiplicity="1" />
+          <End Type="QLBHDienThoaiModel.PayDetail" Role="PayDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pay">
+              <PropertyRef Name="PayID" />
+            </Principal>
+            <Dependent Role="PayDetail">
+              <PropertyRef Name="PayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PayDetail__Produ__04E4BC85">
+          <End Type="QLBHDienThoaiModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.PayDetail" Role="PayDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="PayDetail">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_Supplier">
+          <End Type="QLBHDienThoaiModel.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_TypeProduct">
+          <End Type="QLBHDienThoaiModel.TypeProduct" Role="TypeProduct" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeProduct">
+              <PropertyRef Name="TypeProductID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="TypeProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReceiptDe__Recei__0C85DE4D">
+          <End Type="QLBHDienThoaiModel.Receipt" Role="Receipt" Multiplicity="0..1" />
+          <End Type="QLBHDienThoaiModel.ReceiptDetail" Role="ReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Receipt">
+              <PropertyRef Name="ReceiptID" />
+            </Principal>
+            <Dependent Role="ReceiptDetail">
+              <PropertyRef Name="ReceiptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLBHDienThoaiModelStoreContainer" CdmEntityContainer="QLBHDienThoaiEntities">
+          <EntitySetMapping Name="BillOfSales">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.BillOfSale">
+              <MappingFragment StoreEntitySet="BillOfSale">
+                <ScalarProperty Name="EmployeeDeliveryID" ColumnName="EmployeeDeliveryID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="BuyDate" ColumnName="BuyDate" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="BillID" ColumnName="BillID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BillSaleDetails">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.BillSaleDetail">
+              <MappingFragment StoreEntitySet="BillSaleDetail">
+                <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="PriceProduct" ColumnName="PriceProduct" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="BillID" ColumnName="BillID" />
+                <ScalarProperty Name="BillDetailID" ColumnName="BillDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="VAT" ColumnName="VAT" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartDetails">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.CartDetail">
+              <MappingFragment StoreEntitySet="CartDetail">
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="PriceProduct" ColumnName="PriceProduct" />
+                <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="CartDetailID" ColumnName="CartDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderInvoices">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.OrderInvoice">
+              <MappingFragment StoreEntitySet="OrderInvoice">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="OrderInvoiceID" ColumnName="OrderInvoiceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderInvoiceDetails">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.OrderInvoiceDetail">
+              <MappingFragment StoreEntitySet="OrderInvoiceDetail">
+                <ScalarProperty Name="PriceProduct" ColumnName="PriceProduct" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="OrderInvoiceID" ColumnName="OrderInvoiceID" />
+                <ScalarProperty Name="InvoiceDetailID" ColumnName="InvoiceDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pays">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.Pay">
+              <MappingFragment StoreEntitySet="Pay">
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="PayID" ColumnName="PayID" />
+                <ScalarProperty Name="ReceiptID" ColumnName="ReceiptID" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayDetails">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.PayDetail">
+              <MappingFragment StoreEntitySet="PayDetail">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PayID" ColumnName="PayID" />
+                <ScalarProperty Name="PayDetailID" ColumnName="PayDetailID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="TypeProductID" ColumnName="TypeProductID" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+                <ScalarProperty Name="Images" ColumnName="Images" />
+                <ScalarProperty Name="PriceProduct" ColumnName="PriceProduct" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Promotions">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.Promotion">
+              <MappingFragment StoreEntitySet="Promotion">
+                <ScalarProperty Name="SaleOff" ColumnName="SaleOff" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="TypeProductID" ColumnName="TypeProductID" />
+                <ScalarProperty Name="TypePromotion" ColumnName="TypePromotion" />
+                <ScalarProperty Name="PromotionName" ColumnName="PromotionName" />
+                <ScalarProperty Name="PromotionID" ColumnName="PromotionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Receipts">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.Receipt">
+              <MappingFragment StoreEntitySet="Receipt">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ReceiptID" ColumnName="ReceiptID" />
+                <ScalarProperty Name="BillID" ColumnName="BillID" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReceiptDetails">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.ReceiptDetail">
+              <MappingFragment StoreEntitySet="ReceiptDetail">
+                <ScalarProperty Name="ReceiptID" ColumnName="ReceiptID" />
+                <ScalarProperty Name="ReceiptDetailID" ColumnName="ReceiptDetailID" />
+                <ScalarProperty Name="Describe" ColumnName="Describe" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeProducts">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.TypeProduct">
+              <MappingFragment StoreEntitySet="TypeProduct">
+                <ScalarProperty Name="TypeProductName" ColumnName="TypeProductName" />
+                <ScalarProperty Name="TypeProductID" ColumnName="TypeProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="QLBHDienThoaiModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CustormerId" ColumnName="CustormerId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

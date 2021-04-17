@@ -1,0 +1,334 @@
+﻿<div ng-controller="guaranteeAddController">
+    <div id="page-title">
+        <h5 class="text-overflow">{{properties.function}} {{properties.title.toLowerCase()}}</h5>
+        <!--Searchbox-->
+        <div class="searchbox">
+            <div class="input-group custom-search-form">
+                <input type="text" class="form-control" placeholder="Search..">
+                <span class="input-group-btn">
+                    <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <ol class="breadcrumb">
+        <li><a ui-sref="home">Home</a></li>
+        <li>{{properties.function}}</li>
+        <li class="active">{{properties.title.toLowerCase()}}</li>
+    </ol>
+    <!--End breadcrumb-->
+    <!--Page content-->
+    <!--===================================================-->
+    <div id="page-content">
+        <!--Product table-->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <form name="formData" novalidate>
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-4"></div>
+                        <div class="col-lg-4">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <script src="ordersJkerEditController.js"></script>
+                                    <div class="form-group">
+                                        <label class="control-label">Nhân viên</label>
+                                        <input type="text" class="form-control" ng-model="properties.FullName" name="" disabled>                                                                                
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label" style="padding-top: 8px;">Hóa đơn</label>
+                                        <span class="table-toolbar-right pull-right">
+                                    <!--<i class="fa fa-check-square" style="padding-left: 40px;" data-target="#select-product" data-toggle="modal"></i>-->
+                                    <a class="btn btn-success btn-labeled fa fa-plus" data-target="#select-bill" data-toggle="modal" style="margin-bottom: 5px;">Chọn</a>
+
+                                    </span>                                        
+                                        <input type="text" class="form-control" ng-model="properties.obj.BillID" name="BillID" disabled>
+                                        <span class="error" ng-show="formData.BillID.$error.required">Vui lòng chọn trường này!</span>
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Khách hàng</label>
+                                        
+                                        <span class="error" ng-show="formData.SupplierID.$error.required">Vui lòng chọn trường này!</span>
+                                        <input type="text" id="" class="form-control" ng-model="properties.obj.CustomerName" name="OrderDate" >
+                                    </div>
+                                </div>                                
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Ngày nhận bảo hành</label>
+                                        <input type="text" id="order-date" class="form-control" ng-model="properties.obj.Date" name="OrderDate" >                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Thêm phiếu bảo hành chi tiết </label>   <i class="fa fa-plus" style="cursor: pointer;float: right;padding-top: 3px;" data-target="#add-guarantee-detail" data-toggle="modal"></i>                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">                            
+                            <div class="row"> 
+                                <div class="col-lg-2"></div>
+                                <div class="col-lg-8">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Sản phẩm</th>
+                                                <th>Số lượng</th>
+                                                <th>Mô tả</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="rd in properties.obj.ReceiptDetails">
+                                                <td>{{$index + 1}}</td>
+                                                <td>
+                                                    <input style="transform: translate(0%, 25%);" type="text" id="order-date" class="form-control"
+                                                           ng-model="rd.Name" name="ProductName" disabled>
+                                                </td>
+                                                <td>
+                                                    <input style="transform: translate(0%, 25%);" type="text" id="order-date" class="form-control"
+                                                           ng-model="rd.Amount" name="Amount" >
+                                                </td>
+                                                <td>
+                                                    <textarea type="text" id="" class="form-control"
+                                                           ng-model="rd.Describe" name="Describe"></textarea>
+                                                </td>                                                
+                                                <td>
+                                                    <i class="fa fa-close" ng-click="methods._popGuaranteeDetail($index)" style="cursor: pointer;float: right;padding-top: 3px;"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                                                                            
+                            </div>                                                    
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button class="btn btn-default btn-icon icon-lg fa fa-arrow-left fa-lg" type="button" ui-sref="users"></button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-success btn-labeled fa fa-send fa-lg"
+                                    style="float: right;" type="submit" ng-click="methods._insert()"
+                                    ng-disabled="!formData.$valid">
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+</div>
+<div class="modal fade" id="add-guarantee-detail" role="dialog" tabindex="-1" aria-labelledby="demo-default-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!--Modal header-->
+                <div class="modal-header">
+                    <button data-dismiss="modal" class="close" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Phiếu bảo hành chi tiết</h4>
+                </div>
+                <!--Modal body-->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Sản phẩm</label><span class="table-toolbar-right pull-right">
+                                    <!--<i class="fa fa-check-square" style="padding-left: 40px;" data-target="#select-product" data-toggle="modal"></i>-->
+                                    <a class="btn btn-success btn-labeled fa fa-plus" data-target="#select-product" data-toggle="modal" style="margin-bottom: 5px;">Chọn</a>
+
+                                </span>
+                                        <input type="text" class="form-control" ng-model="properties.recycle.Name" name="ProductName" disabled>                                        
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Số lượng</label>
+                                        <input type="text" id="" class="form-control" ng-model="properties.recycle.AmountOk" name="Amount" ng-change="methods._checkAmount()">                                        
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label class="control-label">Mô tả</label>
+                                        <textarea ng-model="properties.recycle.Describe" id="describe" rows="13" class="form-control"></textarea>                                        
+                                    </div>
+                                </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                                            <button class="btn btn-default" data-dismiss="modal" type="button">Hủy</button>
+                                            <button class="btn btn-primary" data-dismiss="modal" type="button" ng-click="methods._pushGuaranteeDetail()">Thêm</button>
+                                        </div>
+                <!--Modal footer-->
+                <!--<div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                    <button class="btn btn-primary" ng-click="methods._updateWithFK()">Save changes</button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+<div class="modal fade" id="select-product" role="dialog" tabindex="-1" aria-labelledby="demo-default-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!--Modal header-->
+                <div class="modal-header">
+                    <button data-dismiss="modal" class="close" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Chọn sản phẩm</h4>
+                </div>
+                <!--Modal body-->
+                <div class="modal-body">
+                    <div class="panel-body">
+                            <div class="pad-btm form-inline">
+                                <div class="row">  
+                                    <div class="col-sm-6 table-toolbar-left">
+                                        </div>
+                                        <div class="col-sm-6 table-toolbar-right">
+                                            <div class="form-group">
+                                                <input id="input-search" type="text" placeholder="Search" class="form-control" autocomplete="off" ng-model="Search" ng-change="events._keypress()">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="number" min="1" max="100" class="form-control" ng-model="properties.pageSize">
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Mã SP</th>
+                                        <th class="text-center">Tên SP</th>
+                                        <th class="text-center">Số lượng</th>
+                                        <th class="text-center">Giá</th>
+                                        <th class="text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr dir-paginate="sp in properties.productList|itemsPerPage: properties.pageSize | filter:Search">
+                                        <td><a href="#" class="btn-link">{{sp.ProductID}}</a></td>
+                                        <td class="text-center">{{sp.Name}}</td>
+                                        <td class="text-center">{{sp.Amount}}</td>
+                                        <td class="text-center">{{sp.PriceProduct}}</td>
+                                        <td class="text-right">
+                                            <a class="btn btn-xs btn-default add-tooltip" data-dismiss="modal" ng-click="methods._selectProduct(sp)"><i class="fa fa-check-circle"></i></a>                                            
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-8">
+                                    <dir-pagination-controls max-size="15"
+                                                             direction-links="true"
+                                                             boundary-links="true">
+                                    </dir-pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Modal footer-->
+                <!--<div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                    <button class="btn btn-primary" ng-click="methods._updateWithFK()">Save changes</button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="modal fade" id="select-bill" role="dialog" tabindex="-1" aria-labelledby="demo-default-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!--Modal header-->
+                <div class="modal-header">
+                    <button data-dismiss="modal" class="close" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Chọn hóa đơn</h4>
+                </div>
+                <!--Modal body-->
+                <div class="modal-body">
+                    <div class="pad-btm form-inline">
+                                <div class="row">  
+                                    <div class="col-sm-6 table-toolbar-left">
+                                        </div>
+                                        <div class="col-sm-6 table-toolbar-right">
+                                            <div class="form-group">
+                                                <input id="input-bill-search" type="text" placeholder="Search" class="form-control" autocomplete="off" ng-model="billSearch" ng-change="events._keypress()">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="number" min="1" max="100" class="form-control" ng-model="properties.billPageSize">
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Mã HĐ</th>
+                                        <th class="text-center">Khách hàng</th>
+                                        <th class="text-center">Ngày mua</th>
+                                        <th class="text-center">Tổng tiền</th>
+                                        <th class="text-center">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr dir-paginate="b in properties.billList|itemsPerPage: properties.billPageSize | filter: billSearch">
+                                        <td><a href="#" class="btn-link">{{b.BillID}}</a></td>
+                                        <td class="text-center">{{b.FullName}}</td>
+                                        <td class="text-center">{{b.BuyDate|date:'dd/MM/yyyy'}}</td>
+                                        <td class="text-center">{{b.TotalPrice.toLocaleString()}} VNĐ</td>
+                                        <td class="text-center">
+                                            <a class="btn btn-xs btn-default add-tooltip" data-dismiss="modal" ng-click="methods._selectBill(b)"><i class="fa fa-check-circle"></i></a>                                            
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-md-5"></div>
+                                <div class="col-md-8">
+                                    <dir-pagination-controls max-size="15"
+                                                             direction-links="true"
+                                                             boundary-links="true">
+                                    </dir-pagination-controls>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Modal footer-->
+                <!--<div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
+                    <button class="btn btn-primary" ng-click="methods._updateWithFK()">Save changes</button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+<!--===================================================-->
+<!--End page content-->
+</div>

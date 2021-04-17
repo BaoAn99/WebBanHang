@@ -1,0 +1,15 @@
+﻿@model List<WebSiteBanDienThoai.Entity.TypeProduct>
+
+@{
+    ViewBag.Title = "PartialCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<ul class="list-child">
+    <li class="level0 ">
+        @foreach (var item in Model)
+        {
+            <a href="@Html.Action("Category", "Product", new { @TypeProductID=item.TypeProductID})"><i class="fa fa-angle-right"></i>@item.TypeProductName</a>
+        }
+        <a href="#/collections/all"><i class="fa fa-angle-right"></i> Tất cả sản phẩm</a>
+    </li>
+  </ul>

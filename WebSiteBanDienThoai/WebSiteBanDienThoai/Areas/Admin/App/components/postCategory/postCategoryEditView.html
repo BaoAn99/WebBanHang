@@ -1,0 +1,150 @@
+﻿<div id="page-title">
+    <h5 class="text-overflow">Sửa danh mục bài viết</h5>
+    <!--Searchbox-->
+    <div class="searchbox">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Search..">
+            <span class="input-group-btn">
+                <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+    <li><a ui-sref="home">Home</a></li>
+    <li><a ui-sref="product">Danh mục bài viết</a></li>
+    <li class="active">Sửa danh mục bài viết</li>
+</ol>
+
+<!--===================================================-->
+<div id="page-content" ng-controller="editCategoryAddController">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="product_add#sp">Danh mục bài viết </a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="product_add#seo">Tối ưu SEO <span class="badge badge-purple">3</span></a>
+        </li>
+    </ul>
+    <!--Tabs Content-->
+    <div class="tab-content">
+        <div id="sp" class="tab-pane fade active in">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">Tên</label>
+                                <input type="text" class="form-control" ng-model="pc.Name" ng-change="GetSeoTitle()" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-3">
+                            <div class="form-group">
+                                <label class="control-label">Status</label>
+                                <div>
+                                    <input type="checkbox" ng-model="pc.Status">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-3">
+                            <div class="form-group">
+                                <label class="control-label">Hiển thị tại trang chủ</label>
+                                <div>
+                                    <input type="checkbox" ng-model="pc.ShowOnHome">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Thứ tự hiển thị</label>
+                                <input type="number" class="form-control" ng-model="pc.DisplayOrder" />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Danh mục cha</label>
+                                <input type="number" class="form-control" ng-model="pc.ParentID" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button class="btn btn-default btn-icon icon-lg fa fa-arrow-left fa-lg" type="button" ui-sref="post"></button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-success btn-labeled fa fa-send fa-lg" style="float: right;" type="submit" ng-click="UpdatePost()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="seo" class="tab-pane fade">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Meta Title</label>
+                                <input type="text" class="form-control" ng-model="pc.MetaTitle" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Alias</label>
+                                <input type="text" class="form-control" ng-model="pc.Alias" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Meta description</label>
+                                <textarea type="text" class="form-control" ng-model="pc.MetaDescriptions"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Meta keywords</label>
+                                <textarea type="text" class="form-control" ng-model="pc.MetaKeywords"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

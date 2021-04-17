@@ -1,0 +1,45 @@
+﻿<link href="../Areas/Admin/lib/plugins/morris-js/morris.min.css" rel="stylesheet" />
+<div id="page-content">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="col-md-10">
+                        <h3 class="panel-title">Thống kê doanh thu theo năm</h3>
+                    </div>
+                    <div class="col-md-1" style="margin-top: 10px;">
+                        <input type="number" id="year" class="form-control" value="2019" min="2000" max="2019" placeholder="Năm" />
+                    </div>
+                    <div class="col-md-1" style="padding-right: 8px;padding-top: 10px;    padding-left: 5px;">
+                        <button class="btn btn-success" style="padding-right: 8px;" ng-click="analytic()">  Thống kê</button>
+                    </div>
+                </div>
+                <div class="panel-body">
+
+                    <!--Morris Area Chart placeholder-->
+                    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+                    <div id="statisticProduct" style="height:212px"></div>
+                    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Biểu đồ Xuất nhập tồn</h3>
+                </div>
+                <div class="panel-body">
+
+                    <!--Morris Area Chart placeholder-->
+                    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+                    <div id="userAnalytic" style="height:212px"></div>
+                    <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+

@@ -1,0 +1,56 @@
+﻿<div id="page-title">
+    <h5 class="text-overflow">Thêm loại sản phẩm</h5>
+    <!--Searchbox-->
+    <div class="searchbox">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Search..">
+            <span class="input-group-btn">
+                <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+    <li><a ui-sref="home">Home</a></li>
+    <li><a ui-sref="product">Loại Sản Phẩm</a></li>
+    <li class="active">Thêm loại sản phẩm</li>
+</ol>
+
+<!--===================================================-->
+<div id="page-content" ng-controller="typeProductAddController">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="productCategory_add#sp">Loại sản phẩm </a>
+        </li>        
+    </ul>
+    <!--Tabs Content-->
+    <div class="tab-content">
+        <div id="sp" class="tab-pane fade active in">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="control-label">Tên loại sản phẩm</label>
+                                <input type="text" class="form-control" ng-model="TypeProduct.TypeProductName" ng-change="checkTypeProductName()" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-3"></div>
+                    </div>                    
+                </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button class="btn btn-default btn-icon icon-lg fa fa-arrow-left fa-lg" type="button" ui-sref="typeproducts"></button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-success btn-labeled fa fa-send fa-lg" style="float: right;" type="submit" ng-click="Post()" data-target="#demo-panel-ref">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>

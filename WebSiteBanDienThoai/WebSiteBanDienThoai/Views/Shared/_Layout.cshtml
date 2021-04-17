@@ -1,0 +1,236 @@
+﻿@using WebSiteBanDienThoai.Entity;
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Web Bán Điện Thoại - @Html.Raw(ViewBag.title) </title>
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="robots" content="noodp,index,follow">
+    <!--  <meta property="og:url" content="#">-->
+    <meta property="og:site_name" content="ShopMobile">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ShopMobile">
+    <meta property="og:image" content="/Images/logo.png">
+
+    <meta name="revisit-after" content="1 days">
+    <meta name="description" content="@Html.Raw(ViewBag.Metadescription)">
+    <meta name="keywords" content="@Html.Raw(ViewBag.Metakeywords)">
+    <meta name="author" content="Phuc Binz">
+
+    <link href="~/Areas/Admin/lib/plugins/bootstrap-datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/owl.carousel.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/jquery.fancybox.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/jgrowl.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/responsive.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/jgrowl.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/jquery.mmenu.all.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Home.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/vendor/toastr/toastr.css" rel="stylesheet" />
+
+    <script src="~/Scripts/mustache.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/JSController/LoadDataHome.js"></script>
+</head>
+<body ontouchstart="">
+    @Html.Partial("_PartialHeaderMobile")
+    <div id="mm-0" class="mm-page mm-slideout">
+        <div class="bg_mmenu">
+            <div class="page">
+                @Html.Partial("_PartialHeader")
+                <section class="policy hidden-xs">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6">
+                                <div class="policy-col">
+                                    <p><i class="fa fa-star "></i> Sản phẩm chính hãng</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="policy-col exchange">
+                                    <p><i class="fa fa-exchange"></i> Bảo hành dài hạn</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="policy-col">
+                                    <p><i class="fa fa-truck"></i> Giao hàng toàn quốc</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <div class="policy-col last">
+                                    <p><i class="fa fa-life-ring"></i> Hỗ trợ 24/7</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="header-sales hidden-xs">
+                    <div class="container">
+                        <marquee scrollamount="8" behavior="scroll" direction="right" onMouseOver="this.stop()" onMouseOut="this.start()">
+
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="header-sales-col">
+                                        <p><a href="/dac-diem-noi-bat-cua-iphone-x-64gb-silver-1">IPHONE X 64GB SILVER</a></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="header-sales-col">
+                                        <p><a href="/dien-thoai-iphone-8-plus-red-256gb-do-2">Điện thoại iPhone 8 Plus Red 256GB (Đỏ) </a></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="header-sales-col">
+                                        <p><a href="/san-pham/dien-thoai-samsung-galaxy-s9-128gb-hoang-kim-51">Điện thoại Samsung Galaxy S9+ 128GB </a></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="header-sales-col last">
+                                        <p><a href="#">Ưu đã trả góp lên đến 2 năm</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </marquee>
+                    </div>
+                </section>
+
+                <hr style="margin-top: -8px; margin-bottom: 8px;" />
+                <div class="container">
+                    @RenderBody()
+                </div>
+
+                <!--Quảng cáo-->
+                @Html.Partial("_PartialAdvertisements")
+                <!---End Quảng cáo-->
+                <!--Quảng cáo-->
+                @Html.Partial("_PartialNews")
+                <!---End Quảng cáo-->
+                <!--Footer-->
+                @Html.Partial("_PartialFooter")
+                <!---End Footer-->
+                <div id="back-top" style="display: block;"><i class="fa fa-angle-up"></i></div>
+            </div>
+        </div>
+        <div id="facebook-inbox" style="display: block; right: 35px;">
+            <button class="facebook-inbox-tab" style="display: block; background-color: rgb(1, 154, 219); border-color: rgb(1, 154, 219); color: rgb(255, 255, 255);">
+                <span class="facebook-inbox-tab-icon">
+                    <img src="~/Images/fb-icon-1.png>
+                </span>
+                <span class="facebook-inbox-tab-title" style="font-weight: bold;">Chat với chúng tôi</span>
+            </button>
+        </div>
+    </div>
+
+    <style>
+        #facebook-inbox {
+            position: fixed;
+            bottom: 0px;
+            z-index: 110000;
+            text-align: center;
+            display: none;
+        }
+
+        .facebook-inbox-tab-icon {
+            float: left;
+        }
+
+        .facebook-inbox-tab-title {
+            float: left;
+            margin-left: 10px;
+            line-height: 25px;
+        }
+
+        #facebook-inbox-frame {
+            display: none;
+            width: 100%;
+            min-height: 200px;
+            overflow: hidden;
+            position: relative;
+            background-color: #f5f5f5;
+        }
+
+        #fb-root {
+            height: 0px;
+        }
+
+        .facebook-inbox-tab {
+            top: 0px;
+            bottom: 0px;
+            margin: -40px 0px 0px 0px;
+            position: relative;
+            height: 40px;
+            width: 250px;
+            border: 1px solid;
+            border-radius: 0px 0px 0px 0px;
+            text-align: center;
+            background-color: #19a3dd;
+            color: #ffffff;
+        }
+    </style>
+    <script src="~/Scripts/Jker/html-to-pdf/js/jspdf.min.js"></script>
+    <script src="~/Scripts/Jker/html-to-pdf/js/html2canvas.js"></script>
+    <script src="~/Areas/Admin/lib/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
+    <script src="~/Areas/Admin/lib/js/angular.js"></script>
+    <script src="~/Areas/Admin/lib/js/angular-ui-router.js"></script>
+
+    <script src="~/Scripts/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/index.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.mmenu.min.all.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.fancybox.pack.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.magnific-popup.min.js" type="text/javascript"></script>
+
+    <script src="~/Scripts/owl.carousel.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jgrowl.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/Scripts/main.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/json2.min.js"></script>
+
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/owl.carousel.min.js"></script>
+    <script src="~/vendor/toastr/toastr.min.js"></script>
+
+
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <!--My Js-->    
+    <script src="~/Scripts/mustache.js"></script>
+    <script src="~/Scripts/Jker/JsNotify.js"></script>
+    <script src="~/Scripts/Jker/Jker.js"></script>
+    <script src="~/Scripts/Jker/JkerPaging.js"></script>
+    <script src="~/Scripts/Jker/JkerComment.js"></script>
+    <script src="~/Scripts/Jker/Notify/bootstrap-notify.min.js"></script>
+    @RenderSection("jsFooter", required: false)
+    @*<script>
+        $('.owl-carousel').owlCarousel({
+            loop: false,
+            margin: 20,
+            responsiveClass: true,
+            autoplay: true,
+            items: 6, //10 items above 1000px browser width,
+            dots: false,
+            navText: ['<i class="fa fa-angle-left slide-next"></i>', '<i class="fa fa-angle-right slide-prev"></i>'],
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 6
+                }
+            }
+        });
+        </script>*@
+
+    @*<-->Ember js data</-->*@
+</body>
+</html>

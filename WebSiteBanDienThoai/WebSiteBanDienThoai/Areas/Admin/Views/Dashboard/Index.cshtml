@@ -1,0 +1,682 @@
+﻿@using WebSiteBanDienThoai.Common.Utils
+@{
+    WebSiteBanDienThoai.Entity.User user = (WebSiteBanDienThoai.Entity.User)Session["admin"] ??
+        new WebSiteBanDienThoai.Entity.User();
+}
+
+<!DOCTYPE html>
+<html lang="vi" ng-app="AdmShopMobile">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin | Trang Quản Trị</title>
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+    <!--Open Sans Font [ OPTIONAL ] -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;subset=latin" rel="stylesheet">
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="~/Areas/Admin/lib/css/bootstrap.min.css" rel="stylesheet" />
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="~/Areas/Admin/lib/css/nifty.min.css" rel="stylesheet" />
+    <!--Font Awesome [ OPTIONAL ]-->
+    <link href="~/Areas/Admin/lib/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!--Switchery [ OPTIONAL ]-->
+    <link href="~/Areas/Admin/lib/plugins/switchery/switchery.min.css" rel="stylesheet" />
+
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <link href="~/Areas/Admin/lib/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+
+    <!--Demo [ DEMONSTRATION ]-->
+    <link href="~/Areas/Admin/lib/css/demo/nifty-demo.min.css" rel="stylesheet" />
+
+    <link href="~/Areas/Admin/lib/plugins/chosen/chosen.min.css" rel="stylesheet" />
+    <!--SCRIPT-->
+    <!--=================================================-->
+
+    <link href="~/Areas/Admin/lib/plugins/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet" />
+
+    <!--Bootstrap Timepicker [ OPTIONAL ]-->
+    <link href="~/Areas/Admin/lib/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet" />
+
+    <!--Bootstrap Datepicker [ OPTIONAL ]-->
+    <link href="~/Areas/Admin/lib/plugins/bootstrap-datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+
+    <!--Page Load Progress Bar [ OPTIONAL ]-->
+    <link href="~/Areas/Admin/lib/plugins/pace/pace.min.css" rel="stylesheet" />
+    <script src="~/Areas/Admin/lib/plugins/pace/pace.min.js"></script>
+    <script src="~/Areas/Admin/lib/plugins/morris-js/raphael-js/raphael.min.js"></script>
+    <link href="~/Areas/Admin/lib/plugins/morris-js/morris.min.css" rel="stylesheet" />
+
+    <script src="~/Areas/Admin/lib/js/angular.js"></script>
+    <script src="~/Scripts/angular-toastr.tpls.js"></script>
+    <link href="~/Content/angular-toastr.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/lib/plugins/loading/please-wait.css" rel="stylesheet" />
+    <script src="~/Areas/Admin/lib/plugins/loading/please-wait.js"></script>
+    <!-- Begin embed angularJS -->
+    @*<script src="~/Areas/Admin/App/Module.js"></script>
+        <script src="~/Areas/Admin/App/Service.js"></script>
+        <script src="~/Areas/Admin/App/Controller.js"></script>*@
+    <style>
+        #loading-bar .bar {
+            position: relative;
+        }
+    </style>
+    <link href="~/Areas/Admin/lib/css/StyleHome.css" rel="stylesheet" />
+</head>
+<!--TIPS-->
+<!--You may remove all ID or Class names which contain "demo-", they are only used for demonstration. -->
+<body ng-app="shopmobile">
+    <div id="container" class="effect mainnav-lg">
+        <!--NAVBAR-->
+        <!--===================================================-->
+        <header id="navbar">
+            <div id="navbar-container" class="boxed">
+                <!--Brand logo & name-->
+                <!--================================-->
+                <div class="navbar-header">
+                    <a href="/admin#!/admin" class="navbar-brand">
+                        <img src="~/Areas/Admin/lib/img/logo.png" class="brand-icon" />
+
+                    </a>
+                </div>
+                <!--================================-->
+                <!--End brand logo & name-->
+                <!--Navbar Dropdown-->
+                <!--================================-->
+                <div class="navbar-content clearfix">
+                    <ul class="nav navbar-top-links pull-left">
+                        <!--Navigation toogle button-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li class="tgl-menu-btn">
+                            <a class="mainnav-toggle" href="#">
+                                <i class="fa fa-navicon fa-lg"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-top-links pull-right">
+                        <li>
+                            <a class="lang-selector" href="/" target="_blank">
+                                <span class="lang-selected">
+                                    <i class="fa fa-home"></i>
+                                    <span class="lang-name">Trang chủ</span>
+                                </span>
+                            </a>
+                            <!--Language selector menu-->
+                        </li>
+                        <!--Language selector-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li class="dropdown">
+                            <a id="demo-lang-switch" class="lang-selector dropdown-toggle">
+                                <span class="lang-selected">
+                                    <img class="lang-flag" src="~/Areas/Admin/lib/img/flags/Vietnam.png" alt="English" />
+                                    <span class="lang-id">VN</span>
+                                    <span class="lang-name">Việt Nam</span>
+                                </span>
+                            </a>
+                        </li>
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <!--End language selector-->
+                        <!--User dropdown-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li id="dropdown-user" class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle text-right" style="cursor:pointer">
+                                <span class="pull-right">
+                                    <img class="img-circle img-user media-object" src="~/images/user.jpg" alt="Profile Picture">
+                                </span>
+                                <div class="username hidden-xs">@user.FullName</div>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-right with-arrow panel-default">
+
+                                <div class="pad-all text-right">
+                                    <a href="../Admin/Login/logout" class="btn btn-primary">
+                                        <i class="fa fa-sign-out fa-fw"></i> Đăng xuất
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <!--End user dropdown-->
+                    </ul>
+                </div>
+                <!--================================-->
+                <!--End Navbar Dropdown-->
+            </div>
+        </header>
+        <!--===================================================-->
+        <!--END NAVBAR-->
+        <div class="boxed">
+            <!--CONTENT CONTAINER-->
+            <!--===================================================-->
+            <div id="content-container">
+                <div ui-view></div>
+            </div>
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+            <!--MAIN NAVIGATION-->
+            <!--===================================================-->
+            <nav id="mainnav-container">
+                <div id="mainnav">
+                    <!--Shortcut buttons-->
+                    <!--================================-->
+                    <div id="mainnav-shortcut">
+                        <ul class="list-unstyled">
+                            <li class="col-xs-4" data-content="Notification">
+                                <a id="demo-alert" class="shortcut-grid" href="#">
+                                    <i class="fa fa-bullhorn"></i>
+                                </a>
+                            </li>
+                            <li class="col-xs-4" data-content="Page Alerts">
+                                <a id="demo-page-alert" class="shortcut-grid" href="#">
+                                    <i class="fa fa-bell"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--================================-->
+                    <!--End shortcut buttons-->
+                    <!--Menu-->
+                    <!--================================-->
+                    <div id="mainnav-menu-wrap">
+                        <div class="nano">
+                            <div class="nano-content">
+                                <ul id="mainnav-menu" class="list-group">
+
+                                    <li class="active">
+                                        <a href="#">
+                                            <i class="fa fa-cog"></i>
+                                            <span class="menu-title">QT Hệ thống</span>
+                                            <i class="arrow"></i>
+                                        </a>
+                                        <!--Submenu nhà sản zuất-->
+                                        <ul class="collapse in" aria-expanded="true">
+                                            @if (user.RoleId == RoleKey.Admin)
+                                            {
+                                                <li>
+                                                    <a ui-sref="users">
+                                                        <i class="fa fa-arrow-circle-right"></i>
+                                                        <span class="menu-title">
+                                                            Tài khoản
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a ui-sref="user_role">
+                                                        <i class="fa fa-arrow-circle-right"></i>
+                                                        <span class="menu-title">
+                                                            Phân quyền
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            }
+
+                                            <li>
+                                                <a ui-sref="comments">
+                                                    <i class="fa fa-arrow-circle-right"></i>
+                                                    <span class="menu-title">
+                                                        Góp ý
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-hdd-o"></i>
+                                            <span class="menu-title">QL Danh mục</span>
+                                            <i class="arrow"></i>
+                                        </a>
+                                        <!--Submenu Danh mục SP-->
+                                        <ul class="collapse">
+                                            <li>
+                                                <a ui-sref="suppliers">
+                                                    <i class="fa fa-arrow-circle-right"></i>
+                                                    <span class="menu-title">
+                                                        Nhà cung cấp
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ui-sref="customers">
+                                                    <i class="fa fa-arrow-circle-right"></i>
+                                                    <span class="menu-title">
+                                                        Khách hàng
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            @if (user.RoleId == RoleKey.Admin)
+                                            {
+
+                                                <li>
+                                                    <a ui-sref="employees">
+                                                        <i class="fa fa-arrow-circle-right"></i>
+                                                        <span class="menu-title">
+                                                            Nhân Viên
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a ui-sref="payments">
+                                                        <i class="fa fa-arrow-circle-right"></i>
+                                                        <span class="menu-title">
+                                                            Hình thức TT
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            }
+                                            <li>
+                                                <a ui-sref="promotions">
+                                                    <i class="fa fa-arrow-circle-right"></i>
+                                                    <span class="menu-title">
+                                                        Khuyến mại
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-briefcase"></i>
+                                            <span class="menu-title">QL bán hàng</span>
+                                            <i class="arrow"></i>
+                                        </a>
+                                        <!--Submenu nhà bài viết-->
+                                        <ul class="collapse">
+                                            <li>
+                                                <a ui-sref="orders">
+                                                    <i class="fa fa-arrow-circle-right"></i>
+                                                    <span class="menu-title">
+                                                        Đơn hàng
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ui-sref="bills">
+                                                    <i class="fa fa-arrow-circle-right"></i>
+                                                    <span class="menu-title">
+                                                        Hóa đơn
+                                                    </span>
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-briefcase"></i>
+                                            <span class="menu-title">QL bảo hành</span>
+                                            <i class="arrow"></i>
+                                        </a>
+                                        <!--Submenu nhà bài viết-->
+                                        <ul class="collapse">
+                                            <li>
+                                                <a ui-sref="guarantees">
+                                                    <i class="fa fa-arrow-circle-right"></i>
+                                                    <span class="menu-title">
+                                                        Bảo hành
+                                                    </span>
+                                                </a>
+                                            </li>                                            
+                                        </ul>
+                                        <ul class="collapse">
+                                            <li>
+                                                <a ui-sref="returnGuarantees">
+                                                    <i class="fa fa-arrow-circle-right"></i>
+                                                    <span class="menu-title">
+                                                        Trả bảo hành
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            @*<i class="fa fa-briefcase"></i>*@
+                                            <i class="fa fa-truck"></i>
+                                            <span class="menu-title">QL nhập hàng</span>
+                                            <i class="arrow"></i>
+                                        </a>
+                                        <!--Submenu nhà bài viết-->
+                                        <ul class="collapse">
+                                            <li>
+                                                <a ui-sref="receipts">
+                                                    <i class="fa fa-arrow-circle-right"></i>
+                                                    <span class="menu-title">
+                                                        Hóa đơn nhập
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li id="SanPham">
+                                        <a href="#">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span class="menu-title">QL Hàng hóa</span>
+                                            <i class="arrow"></i>
+                                        </a>
+                                        <!--Submenu sản phẩm-->
+                                        <ul class="collapse">
+                                            <li>
+                                                <a ui-sref="products">
+                                                    <i class="fa fa-arrow-circle-right"></i>
+                                                    <span class="menu-title">
+                                                        Hàng hóa
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ui-sref="typeproducts">
+                                                    <i class="fa fa-arrow-circle-right"></i>
+                                                    <span class="menu-title">
+                                                        Loại HH
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-bar-chart"></i>
+                                            <span class="menu-title">BC Thống kê</span>
+                                            <i class="arrow"></i>
+                                        </a>
+                                        <!--Submenu nhà bài viết-->
+                                        <ul class="collapse">
+                                            <li>
+                                                <a ui-sref="analytic" >
+                                                    <i class="fa fa-arrow-circle-right"></i>
+                                                    <span class="menu-title">
+                                                        Doanh thu
+                                                    </span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a ui-sref="analyticExist">
+                                                    <i class="fa fa-arrow-circle-right"></i>
+                                                    <span class="menu-title">
+                                                      Xuất nhập tồn
+                                                    </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="" data-target="#change-pass" data-toggle="modal">
+                                            <i class="fa fa-edit"></i>
+                                            <span class="menu-title">Đổi mật khẩu</span>
+                                        </a>
+                                    </li>
+                                    <!--Menu list item-->
+                                    <li class="list-divider"></li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--================================-->
+                    <!--End menu-->
+                </div>
+            </nav>
+            <!--===================================================-->
+            <!--END MAIN NAVIGATION-->
+        </div>
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+            <!-- Visible when footer positions are fixed -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="show-fixed pull-right">
+                <ul class="footer-list list-inline">
+                    <li>
+                        <p class="text-sm">SEO Proggres</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-danger"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <p class="text-sm">Online Tutorial</p>
+                        <div class="progress progress-sm progress-light-base">
+                            <div style="width: 80%" class="progress-bar progress-bar-primary"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <button class="btn btn-sm btn-dark btn-active-success">Checkout</button>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Visible when footer positions are static -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <!-- Remove the class name "show-fixed" and "hide-fixed" to make the content always appears. -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <p class="pad-lft">&#0169; 2018 Shop Mobile</p>
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+        <!-- SCROLL TOP BUTTON -->
+        <!--===================================================-->
+        <button id="scroll-top" class="btn"><i class="fa fa-chevron-up"></i></button>
+        <!--===================================================-->
+    </div>
+    <div class="modal fade" id="change-pass" role="dialog" tabindex="-1" aria-labelledby="demo-default-modal" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!--Modal header-->
+                <div class="modal-header">
+                    <button data-dismiss="modal" class="close" type="button">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title">Đổi mật khẩu</h4>
+                </div>
+
+                <!--Modal body-->
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12"><label>Mật khẩu cũ</label></div>
+                        <div class="col-lg-6"><input type="password" id="old-pass" name="oldPass" class="form-control" autocomplete="off" /></div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-12"><label>Mật khẩu mới</label></div>
+                        <div class="col-lg-6"><input type="password" id="new-pass" name="newPass" class="form-control" /></div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-12"><label>Nhập lại mật khẩu mới</label></div>
+                        <div class="col-lg-6"><input type="password" id="re-new-pass" name="reNewPass" class="form-control" /></div>
+                    </div>
+                    <br />
+                </div>
+
+                <!--Modal footer-->
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Hủy</button>
+                    <button data-dismiss="modal" class="btn btn-primary" onclick="_changePass()">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function _changePass() {
+            if ($("#new-pass").val() != $("#re-new-pass").val()) {
+                notify.methods.warning._showDialog("Mật khẩu không khớp!", "../Account");
+                return;
+            }
+            dataSend = { oldPass: $("#old-pass").val(), newPass: $("#new-pass").val(), reNewPass: $("#re-new-pass").val() };
+            server.methods._request("POST", "/Login/ChangePass", dataSend, function (response) {
+                if (response.status == false) {
+                    notify.methods.warning._showDialog(response.mess, "../Login");
+                } else if (response.status == "login") {
+                    notify.methods.warning._showDialog(response.mess, "../Login/Logout");
+                    window.location.href = "../Login/Index";
+                }
+                else {
+                    notify.methods.success._showDialog(response.mess, "../Login");
+                }
+            }, function (response) { }, function (response) { });
+        }
+    </script>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->
+    <!-- SETTINGS - DEMO PURPOSE ONLY -->
+    <!--===================================================-->
+    <!--===================================================-->
+    <!-- END SETTINGS -->
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+    <!--jQuery [ REQUIRED ]-->
+
+    <script src="~/Areas/Admin/lib/js/jquery-2.1.1.min.js"></script>
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="~/Areas/Admin/lib/js/bootstrap.min.js"></script>
+    <!--Fast Click [ OPTIONAL ]-->
+    <script src="~/Areas/Admin/lib/plugins/fast-click/fastclick.min.js"></script>
+    <!--Nifty Admin [ RECOMMENDED ]-->
+    <script src="~/Areas/Admin/lib/js/nifty.min.js"></script>
+    <!--Switchery [ OPTIONAL ]-->
+    <script src="~/Areas/Admin/lib/plugins/bootbox/bootbox.min.js"></script>
+    <script src="~/Areas/Admin/lib/plugins/switchery/switchery.min.js"></script>
+    <!--Bootstrap Select [ OPTIONAL ]-->
+    <script src="~/Areas/Admin/lib/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+    <!--Demo script [ DEMONSTRATION ]-->
+    <script src="~/Areas/Admin/lib/js/demo/nifty-demo.min.js"></script>
+    <script src="~/Areas/Admin/lib/plugins/chosen/chosen.jquery.min.js"></script>
+    <script src="~/Areas/Admin/lib/plugins/morris-js/morris.min.js"></script>
+    <script src="~/Areas/Admin/lib/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Areas/Admin/lib/plugins/bootstrap-timepicker/bootstrap-timepicker.min.js"></script>
+    <script src="~/Areas/Admin/lib/js/dirPagination.js"></script>
+    <!--Demo script [ ckediter ]-->
+    <script src="~/Areas/Admin/lib/plugins/ckeditor/ckeditor.js"></script>
+    <script src="~/Areas/Admin/lib/plugins/ng-ckeditor/ng-ckeditor.js"></script>
+    <script src="~/Areas/Admin/lib/plugins/ckfinder/ckfinder.js"></script>
+    <script src="~/Scripts/Jker/Notify/bootstrap-notify.min.js"></script>
+    <script src="~/Scripts/Jker/JsNotify.js"></script>
+    <script src="~/Scripts/Jker/Jker.js"></script>
+    <!--Demo script [ anguler ]-->
+    <script src="~/Areas/Admin/lib/js/angular.js"></script>
+    <script src="~/Areas/Admin/lib/js/angular-ui-router.js"></script>
+    <script src="~/Areas/Admin/App/shared/modules/ShopMobile.common.js"></script>
+    <script src="~/Areas/Admin/App/shared/modules/Router.module.js"></script>
+
+    <script src="~/Areas/Admin/App/shared/services/apiService.js"></script>
+    <script src="~/Areas/Admin/App/shared/services/notificationService.js"></script>
+    <script src="~/Areas/Admin/App/shared/services/authData.js"></script>
+    <script src="~/Areas/Admin/App/shared/services/authenticationService.js"></script>
+    <script src="~/Areas/Admin/App/shared/services/commonService.js"></script>
+    <script src="~/Areas/Admin/App/app.js"></script>
+
+    <script src="~/Areas/Admin/App/components/home/homeController.js"></script>
+
+    <!--product [ Angular ]-->
+    <script src="~/Areas/Admin/App/components/products/productListController.js"></script>
+    <script src="~/Areas/Admin/App/components/products/productAddController.js"></script>
+    <script src="~/Areas/Admin/App/components/products/productEditController.js"></script>
+
+    <!--product category[ Angular ]-->
+    @*<script src="~/Areas/Admin/App/components/productCategory/productCategoryListController.js"></script>
+        <script src="~/Areas/Admin/App/components/productCategory/productCategoryEditController.js"></script>
+        <script src="~/Areas/Admin/App/components/productCategory/productCategoryAddController.js"></script>*@
+
+    <!--user [ Angular ]-->
+    <script src="~/Areas/Admin/App/components/users/usersListController.js"></script>
+    <script src="~/Areas/Admin/App/components/users/usersEditController.js"></script>
+    <script src="~/Areas/Admin/App/components/users/usersAddController.js"></script>
+    <script src="~/Areas/Admin/App/components/users/usersRoleController.js"></script>
+    <script src="~/Areas/Admin/App/components/users/usersDarkListController.js"></script>
+
+    <!--supplier [ Angular ]-->
+    <script src="~/Areas/Admin/App/components/Supplier/SupplierAddController.js"></script>
+    <script src="~/Areas/Admin/App/components/Supplier/SupplierEditController.js"></script>
+    <script src="~/Areas/Admin/App/components/Supplier/SupplierListController.js"></script>
+
+    <!--Order [ Angular ]-->
+    <script src="~/Areas/Admin/App/components/orders/ordersListController.js"></script>
+    <script src="~/Areas/Admin/App/components/orders/ordersDetailController.js"></script>
+
+    <!--OrderInvoice [ Angular ]-->
+    <script src="~/Areas/Admin/App/components/ordersJker/ordersJkerListController.js"></script>
+    <script src="~/Areas/Admin/App/components/ordersJker/ordersJkerAddController.js"></script>
+    <script src="~/Areas/Admin/App/components/ordersJker/ordersJkerEditController.js"></script>
+
+    <!--Bill [ Angular ]-->
+    <script src="~/Areas/Admin/App/components/bills/billListController.js"></script>
+    <script src="~/Areas/Admin/App/components/bills/billDetailController.js"></script>
+
+    <!--Post [ Angular ]-->
+    <script src="~/Areas/Admin/App/components/post/postListController.js"></script>
+    <script src="~/Areas/Admin/App/components/post/postEditController.js"></script>
+    <script src="~/Areas/Admin/App/components/post/postAddController.js"></script>
+    <script src="~/Areas/Admin/App/components/Statistics/BieuDo.js"></script>
+    <script src="~/Areas/Admin/App/components/Statistics/ThongKeListController.js"></script>
+
+    <!--PostCategory [Angular]-->
+    @*<script src="~/Areas/Admin/App/components/postCategory/postCategoryAddController.js"></script>
+        <script src="~/Areas/Admin/App/components/postCategory/postCategoryEditController.js"></script>
+        <script src="~/Areas/Admin/App/components/postCategory/postCategoryListController.js"></script>*@
+    <!--TypeProduct [Angular]-->
+    <script src="~/Areas/Admin/App/components/typeProduct/typeProductAddController.js"></script>
+    <script src="~/Areas/Admin/App/components/typeProduct/typeProductEditController.js"></script>
+    <script src="~/Areas/Admin/App/components/typeProduct/typeProductListController.js"></script>
+
+
+    <!--Employee [Angular]-->
+    <script src="~/Areas/Admin/App/components/employee/employeeAddController.js"></script>
+    <script src="~/Areas/Admin/App/components/employee/employeeEditController.js"></script>
+    <script src="~/Areas/Admin/App/components/employee/employeeListController.js"></script>
+
+
+    <!--Customer [Angular]-->
+    <script src="~/Areas/Admin/App/components/customer/customerAddController.js"></script>
+    <script src="~/Areas/Admin/App/components/customer/customerEditController.js"></script>
+    <script src="~/Areas/Admin/App/components/customer/customerListController.js"></script>
+
+    <!--Customer [Angular]-->
+    <script src="~/Areas/Admin/App/components/payment/paymentAddController.js"></script>
+    <script src="~/Areas/Admin/App/components/payment/paymentEditController.js"></script>
+    <script src="~/Areas/Admin/App/components/payment/paymentListController.js"></script>
+
+    <!--comment [Angular]-->
+    <script src="~/Areas/Admin/App/components/feedback/feedbackAddController.js"></script>
+    <script src="~/Areas/Admin/App/components/feedback/feedbackEditController.js"></script>
+    <script src="~/Areas/Admin/App/components/feedback/feedbackListController.js"></script>
+
+    <!--Promotion [Angular]-->
+    <script src="~/Areas/Admin/App/components/promotion/promotionAddController.js"></script>
+    <script src="~/Areas/Admin/App/components/promotion/promotionEditController.js"></script>
+    <script src="~/Areas/Admin/App/components/promotion/promotionListController.js"></script>
+    <!--Receipt [Angular]-->
+    <script src="~/Areas/Admin/App/components/receipt/receiptsJkerAddController.js"></script>
+    <script src="~/Areas/Admin/App/components/receipt/receiptsJkerEditController.js"></script>
+    <script src="~/Areas/Admin/App/components/receipt/receiptsJkerListController.js"></script>
+    <!--Return Receipt [Angular]-->
+    <script src="~/Areas/Admin/App/components/returnReceipt/returnReceiptAddController.js"></script>
+    <script src="~/Areas/Admin/App/components/returnReceipt/returnReceiptEditController.js"></script>
+    <script src="~/Areas/Admin/App/components/returnReceipt/returnReceiptListController.js"></script>
+<script src="~/Areas/Admin/App/components/analytic/analyticListController.js"></script>
+<script src="~/Areas/Admin/App/components/analytic/analyticExistListController.js"></script>
+
+<script>
+
+        function Hello(check) {
+            if (check) {
+                $.niftyNoty({
+                    type: 'success',
+                    container: 'floating',
+                    html: 'Xin chào: <strong> @user.FullName </strong>',
+                    timer: 8000
+                });
+                check = false;
+            }
+        }
+        Hello(true);
+    </script>
+    <input id="NguoiDung" type="hidden" value="@ViewBag.TenHienThi" />
+</body>
+</html>

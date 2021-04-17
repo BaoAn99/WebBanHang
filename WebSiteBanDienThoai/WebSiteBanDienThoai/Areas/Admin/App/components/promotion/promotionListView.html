@@ -1,0 +1,95 @@
+﻿<div ng-controller="promotionListController">
+    <div id="page-title">
+        <h5 class="text-overflow">{{properties.title}} {{properties.function}}</h5>
+        <!--Searchbox-->
+        <div class="searchbox">
+            <div class="input-group custom-search-form">
+                <input type="text" class="form-control" placeholder="Search..">
+                <span class="input-group-btn">
+                    <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+    <ol class="breadcrumb">
+        <li><a ui-sref="home">Home</a></li>
+        <li >{{properties.function}}</li>
+        <li class="active">{{properties.title}}</li>
+    </ol>
+    <!--End breadcrumb-->
+    <!--Page content-->
+    <!--===================================================-->
+    <div id="page-content">
+        <!--Product table-->
+        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+        <div>
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="pad-btm form-inline">
+                        <div class="row">
+                            <div class="col-sm-6 table-toolbar-left">
+                                <a class="btn btn-purple btn-labeled fa fa-plus" ui-sref="promotion_add">Add</a>
+                                <div class="btn-group btn-group">
+                                    <button class="btn btn-default"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 table-toolbar-right">
+                                <div class="form-group">
+                                    <input id="input-search" type="text" placeholder="Search" class="form-control" autocomplete="off" ng-model="Search">
+                                </div>
+                                <div class="form-group">
+                                    <input type="number" min="1" max="100" class="form-control" ng-model="properties.pageSize">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Mã khuyến mãi</th>
+                                    <th class="text-center">Loại khuyến mãi</th>
+                                    <th class="text-center">Khuyến mãi cho</th>
+                                    <th class="text-center">Thời gian</th>
+                                    <th class="text-center">Sale off</th>
+                                    <th class="text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="prm in properties.promList|itemsPerPage: pageSize | filter:Search">
+                                    <td class="text-center"><a ui-sref="promotion_edit({ID: '{{prm.PromotionName}}'})" class="btn-link">{{prm.PromotionName}}</a></td>
+                                    <td class="text-center" ng-if="prm.TypePromotion==1">Khuyến mãi theo loại sản phẩm</td>
+                                    <td class="text-center" ng-if="prm.TypePromotion==2">Khuyến mãi theo sản phẩm</td>
+                                    <td class="text-center" ng-if="prm.TypePromotion==1">{{methods._getNameTypeProduct(prm.TypeProductID)}}</td>   
+                                    <td class="text-center" ng-if="prm.TypePromotion==2">{{methods._getNameProduct(prm.ProductID)}}</td>                                   
+                                    <td class="text-center">{{prm.StartTime|date:'dd/MM/yyyy'}}-{{prm.EndTime|date:'dd/MM/yyyy'}}</td>
+                                    <td class="text-center">{{prm.SaleOff}}</td>
+                                    <td class="text-right">
+                                        <a class="btn btn-xs btn-default add-tooltip" ui-sref="promotion_edit({PromotionID : '{{prm.PromotionID}}'})"><i class="fa fa-pencil"></i></a>
+                                        <button class="btn btn-xs btn-danger add-tooltip" ng-click="methods._delete(prm.PromotionID,prm.PromotionName)"><i class="fa fa-times"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-md-5"></div>
+                            <div class="col-md-8">
+                                <dir-pagination-controls max-size="15"
+                                                         direction-links="true"
+                                                         boundary-links="true">
+                                </dir-pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Bootbox Modals [ OPTIONAL ]-->
+        <script src="../Areas/Admin/lib/plugins/bootbox/bootbox.min.js"></script>
+        <!--Modals [ SAMPLE ]-->
+        <!--End user table-->
+    </div>
+</div>
+<!--===================================================-->
+<!--End page content-->

@@ -1,0 +1,65 @@
+﻿@{
+    ViewBag.Title = "Lấy lại mật khẩu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Main Breadcrumb -->
+<div class="main-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li><a href="/">Trang chủ</a></li>
+                    <li class="active">Lấy lại mật khẩu</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main Breadcrumb -->
+<div class="main-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-style form-login">
+                    <h3 class="form-heading">Đổi mật khẩu</h3>
+                    @if ((string)Session["regErrUser"] != "" && Session["regErrUser"] != null)
+                    {
+                        <div class="alert alert-danger">
+                            <strong>Thông báo!</strong> @Session["regErrUser"]
+                        </div>
+                    }
+                    <p class="form-description">Nếu bạn có một tài khoản, xin vui lòng chuyển qua trang <a href="../Account/Login">đăng nhập.</a></p>
+                    @using (Html.BeginForm("Forgot", "Account", FormMethod.Post))
+                    {
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <p class="text-left">Mật khẩu*</p>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="password" value="" name="passnew">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <p class="text-left">Xác nhận mật khẩu*</p>
+                                </div>
+                                <div class="col-md-8">
+                                    <input type="password" value="" name="repass">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                            </div>
+                            <div class="col-md-8">
+                                <button class="btn btn-success" type="submit">Xác Nhận</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
