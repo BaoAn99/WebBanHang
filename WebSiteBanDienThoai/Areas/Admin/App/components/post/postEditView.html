@@ -1,0 +1,156 @@
+﻿<div id="page-title">
+    <h5 class="text-overflow">Sửa Bài viết</h5>
+    <!--Searchbox-->
+    <div class="searchbox">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Search..">
+            <span class="input-group-btn">
+                <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+    <li><a ui-sref="home">Home</a></li>
+    <li><a ui-sref="product">Bài viết</a></li>
+    <li class="active">Thêm bài viết</li>
+</ol>
+<!--End breadcrumb-->
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content" ng-controller="postEditController">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="product_add#sp">Bài viết </a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="product_add#seo">Tối ưu SEO <span class="badge badge-purple">3</span></a>
+        </li>
+    </ul>
+    <!--Tabs Content-->
+    <div class="tab-content">
+        <div id="sp" class="tab-pane fade active in">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label">Tiêu đề</label>
+                                <input type="text" class="form-control" ng-model="p.Title" ng-change="GetSeoTitle()" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label">Ảnh đại diện</label>
+                                <button class="btn btn-success btn-labeled fa fa-upload fa-lg" ng-click="ChooseImage1()">Chọn ảnh</button>
+                                <input type="text" class="form-control" ng-model="p.ArticleImage" disabled />
+                                <img class="img img-thumbnail" ng-src="{{p.ArticleImage}}" id="img1" />
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                        </div>
+                        <div class="col-sm-3">
+                        </div>
+                        <div class="col-sm-3">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2 col-xs-3">
+                            <div class="form-group">
+                                <label class="control-label">Status</label>
+                                <div>
+                                    <input type="checkbox" ng-model="p.Status">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-3">
+                            <div class="form-group">
+                                <label class="control-label">Top Hot</label>
+                                <div>
+                                    <input type="checkbox" ng-model="p.TopHot">
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Nội dung mô tả ngắn</label>
+                                    <textarea class="form-control" ng-model="p.Description"  rows="6"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label">Nội dung bài viết</label>
+                                    <textarea ng-model="p.Detail" id="article-detail"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button class="btn btn-default btn-icon icon-lg fa fa-arrow-left fa-lg" type="button" ui-sref="products"></button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-success btn-labeled fa fa-send fa-lg" style="float: right;" type="submit" ng-click="UpdatePost()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="seo" class="tab-pane fade">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Alias</label>
+                                <input type="text" class="form-control" ng-model="p.Alias" required>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Meta description</label>
+                                <textarea type="text" class="form-control" ng-model="p.MetaDescriptions"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <div class="form-group">
+                                <label class="control-label">Meta keywords</label>
+                                <textarea type="text" class="form-control" ng-model="p.MetaKeywords"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                {{}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,75 @@
+﻿<div id="page-title">
+    <h5 class="text-overflow">Thêm hình thức thanh toán</h5>
+    <!--Searchbox-->
+    <div class="searchbox">
+        <div class="input-group custom-search-form">
+            <input type="text" class="form-control" placeholder="Search..">
+            <span class="input-group-btn">
+                <button class="text-muted" type="button"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </div>
+</div>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<ol class="breadcrumb">
+    <li><a ui-sref="home">Home</a></li>
+    <li><a ui-sref="product">Hình thức thanh toán</a></li>
+    <li class="active">Sửa hình thức thanh toán</li>
+</ol>
+<!--End breadcrumb-->
+<!--Page content-->
+<!--===================================================-->
+<div id="page-content" ng-controller="paymentEditController">
+    <ul class="nav nav-tabs">
+        <li class="active">
+            <a data-toggle="tab" href="product_add#sp">Hình thức thanh toán </a>
+        </li>
+
+    </ul>
+    <!--Tabs Content-->
+    <div class="tab-content">
+        <div class="panel">
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-sm-2">
+
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="control-label">Tên</label>
+                            <input type="text" class="form-control" ng-model="elm.Name" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label class="control-label">Loại </label>
+                            
+                            <select class="form-control" ng-model="elm.Status"   
+                                    ng-options="item.value as item.text for item in prop.status">                                            
+                            </select>
+ 
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+
+                    </div>
+                </div>
+           
+
+                <div class="panel-footer">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <button class="btn btn-default btn-icon icon-lg fa fa-arrow-left fa-lg" type="button" ui-sref="payments"></button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class="btn btn-success btn-labeled fa fa-send fa-lg" style="float: right;" type="submit" ng-click="edit()">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
